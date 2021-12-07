@@ -15,7 +15,7 @@ public interface LeadLoanMapper {
 
 
     @Mapping(target = "source", source = "leadSource")
-    public LeadLoanEntity toLoanEntity(LeadLoanRequestDto leadLoanRequestDto, LeadSource leadSource);
+    LeadLoanEntity toLoanEntity(LeadLoanRequestDto leadLoanRequestDto, LeadSource leadSource);
 
     @Mapping(target = "customerEvent.fullname", source = "fullname")
     @Mapping(target = "customerEvent.pincode", source = "pincode")
@@ -26,7 +26,7 @@ public interface LeadLoanMapper {
     @Mapping(target = "mkrAndGovAgreement", source = "isAgreement")
     @Mapping(target = "amount", source = "productAmount")
     @Mapping(target = "duration", source = "productDuration")
-    public LeadLoanEvent toLeadLoanModel(LeadLoanEntity leadLoanEntity);
+    LeadLoanEvent toLeadLoanModel(LeadLoanEntity leadLoanEntity);
 
 
 }

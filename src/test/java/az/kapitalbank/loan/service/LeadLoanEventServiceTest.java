@@ -51,7 +51,7 @@ class LeadLoanEventServiceTest {
     }
 
     @Test
-    void saveLeadSuccess() {
+    void whenSaveLeadCall_ThenShouldBeSuccess() {
         LeadLoanRequestDto leadLoanRequestDtoMock = new LeadLoanRequestDto();
         leadLoanRequestDtoMock.setFullname("Irshad Eyvazov");
         leadLoanRequestDtoMock.setPincode("2BDS9TM");
