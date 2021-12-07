@@ -15,8 +15,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-  banner:
-    location: classpath:banner/banner.txt
 
 server:
   port: 8083

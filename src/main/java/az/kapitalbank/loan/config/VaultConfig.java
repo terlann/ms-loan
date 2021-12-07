@@ -1,5 +1,6 @@
 package az.kapitalbank.loan.config;
 
+import az.kapitalbank.loan.constants.ApplicationProfiles;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -8,10 +9,14 @@ import org.springframework.cloud.vault.config.SecretBackendConfigurer;
 import org.springframework.cloud.vault.config.VaultConfigurer;
 import org.springframework.cloud.vault.config.VaultKeyValueBackendProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
+@Profile(value = {ApplicationProfiles.DEV,
+        ApplicationProfiles.PRE_PROD,
+        ApplicationProfiles.PROD})
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class VaultConfig implements VaultConfigurer {
 

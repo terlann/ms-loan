@@ -1,0 +1,7 @@
+spring:
+  cloud:
+   config:
+     consule:
+       enable: false
+     vault:
+       enable: false
