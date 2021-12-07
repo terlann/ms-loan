@@ -98,5 +98,4 @@ class LeadLoanEventServiceTest {
         Mockito.verify(leadLoanSender, Mockito.times(1)).sendMessage(leadLoanEventMock);
     }
 
-
 }
