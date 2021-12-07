@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        produceLead-out-0:
+            destination: hot-lead-integration-loan
+      kafka:
+        binder:
+           minPartitionCount: 3
+           brokers: 10.0.81.59:9092
+  datasource:
+    url: jdbc:oracle:thin:@//172.21.14.34:1521/ldb
+    username: LEAD_HOT
+    password: 4H68enVKjpr##ApzemCG4Y
+  jpa:
+    hibernate:
+      ddl-auto: none
+  banner:
+    location: classpath:banner/banner.txt
+
+server:
+  port: 8083
+
+
+
+
+
