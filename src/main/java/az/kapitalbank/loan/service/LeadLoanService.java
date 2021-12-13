@@ -1,5 +1,8 @@
 package az.kapitalbank.loan.service;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
@@ -19,9 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -37,7 +37,7 @@ public class LeadLoanService {
     public WrapperResponse saveLead(LeadLoanRequestDto leadLoanRequestDto, String leadSource) {
         log.info("save lead in db start... Request - {}, Lead-Source - [{}]", leadLoanRequestDto, leadSource);
         Optional<LeadSourceEntity> source = leadSourceRepository.findById(leadSource);
-        if (!source.isPresent()) {
+        if (source.isEmpty()) {
             throw new SourceNotFoundException(leadSource);
         }
         LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source.get());
@@ -45,14 +45,13 @@ public class LeadLoanService {
         loanEntity.setInsertedDate(LocalDate.now());
 
         LeadLoanEntity leadLoanEntityResult = leadLoanRepository.save(loanEntity);
-        LeadLoanEvent leadLoanEvent = leadLoanMapper.toLeadLoanModel(leadLoanEntityResult);
+        LeadLoanEvent leadLoanEvent = leadLoanMapper.toLeadLoanModel(leadLoanEntityResult, source.get());
         sendLeadWithMessaging(leadLoanEvent);
         SaveLeadResponseDto saveLeadResponseDto = new SaveLeadResponseDto();
         saveLeadResponseDto.setLeadId(String.valueOf(leadLoanEntityResult.getId()));
-        WrapperResponse<SaveLeadResponseDto> response = WrapperResponse.<SaveLeadResponseDto>builder()
+        return WrapperResponse.<SaveLeadResponseDto>builder()
                 .data(saveLeadResponseDto)
                 .build();
-        return response;
     }
 
     public void sendLeadWithMessaging(LeadLoanEvent leadLoanEvent) {
