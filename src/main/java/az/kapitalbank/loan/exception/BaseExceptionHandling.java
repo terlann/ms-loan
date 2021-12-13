@@ -14,7 +14,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class BaseExceptionHandling extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+                                                                  HttpHeaders headers,
+                                                                  HttpStatus status,
+                                                                  WebRequest request) {
         log.info(ex.toString());
         log.info(request.toString());
         return super.handleHttpMessageNotReadable(ex, headers, status, request);

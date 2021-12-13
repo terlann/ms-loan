@@ -1,17 +1,14 @@
 package az.kapitalbank.loan.dto;
 
+import java.math.BigDecimal;
+import javax.validation.constraints.NotNull;
+
 import az.kapitalbank.loan.constants.FormalizationMethod;
 import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.SubProductType;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
