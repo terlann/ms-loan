@@ -1,6 +1,5 @@
 package az.kapitalbank.loan.utils;
 
-import az.kapitalbank.loan.constants.LeadSource;
 import org.springframework.core.convert.converter.Converter;
 
 public class StringToEnumConverter implements Converter<String, LeadSource> {

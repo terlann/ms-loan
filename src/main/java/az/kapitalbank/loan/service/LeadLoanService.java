@@ -1,15 +1,17 @@
 package az.kapitalbank.loan.service;
 
-import az.kapitalbank.loan.constants.LeadSource;
 import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
 import az.kapitalbank.loan.dto.response.WrapperResponse;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
+import az.kapitalbank.loan.entity.LeadSourceEntity;
+import az.kapitalbank.loan.exception.model.SourceNotFoundException;
+import az.kapitalbank.loan.mapper.LeadLoanMapper;
 import az.kapitalbank.loan.message.LeadLoanSender;
 import az.kapitalbank.loan.message.model.LeadLoanEvent;
-import az.kapitalbank.loan.mapper.LeadLoanMapper;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
+import az.kapitalbank.loan.repository.LeadSourceRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -18,22 +20,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class LeadLoanService {
 
-    final LeadLoanMapper leadLoanMapper;
-    final LeadLoanRepository leadLoanRepository;
-    final LeadLoanSender leadLoanSender;
+    LeadLoanMapper leadLoanMapper;
+    LeadLoanRepository leadLoanRepository;
+    LeadLoanSender leadLoanSender;
+    LeadSourceRepository leadSourceRepository;
 
     @Transactional
     public WrapperResponse saveLead(LeadLoanRequestDto leadLoanRequestDto, String leadSource) {
         log.info("save lead in db start... Request - {}, Lead-Source - [{}]", leadLoanRequestDto, leadSource);
-        LeadSource source = LeadSource.valueOf(leadSource);
-        LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source);
+        Optional<LeadSourceEntity> source = leadSourceRepository.findById(leadSource);
+        if (!source.isPresent()) {
+            throw new SourceNotFoundException(leadSource);
+        }
+        LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source.get());
         loanEntity.setStatus(LeadStatus.WAITING);
         loanEntity.setInsertedDate(LocalDate.now());
 

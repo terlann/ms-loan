@@ -1,24 +1,16 @@
 package az.kapitalbank.loan.service;
 
-import az.kapitalbank.loan.constants.LeadSource;
-import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.constants.ProductType;
-import az.kapitalbank.loan.dto.LeadLoanRequestDto;
-import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
-import az.kapitalbank.loan.dto.response.WrapperResponse;
-import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.message.LeadLoanSender;
 import az.kapitalbank.loan.message.model.CustomerEvent;
 import az.kapitalbank.loan.message.model.LeadLoanEvent;
 import az.kapitalbank.loan.mapper.LeadLoanMapper;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
