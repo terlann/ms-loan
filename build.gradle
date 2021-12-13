@@ -19,9 +19,9 @@ configurations {
 //	enabled = false
 //}
 
-//jar {
-//	enabled = true
-//}
+jar {
+	enabled = false
+}
 
 
 repositories {
