@@ -14,19 +14,7 @@ import java.time.LocalDate;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class LeadLoanEvent {
-    Long id;
-    CustomerEvent customerEvent;
-    ProductType productType;
-    SubProductType subProductType;
-    BigDecimal amount;
-    String duration;
-    String otherProcessId;
-    String couponCode;
-    String campaignName;
-    LeadSource source;
-    String leadComment;
-    Boolean mkrAndGovAgreement;
-    LocalDate insertedDate;
-    FormalizationMethod formalizationMethod;
+public class LeadSource {
+    String code;
+    String name;
 }

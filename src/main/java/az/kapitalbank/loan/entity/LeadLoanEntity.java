@@ -1,7 +1,6 @@
 package az.kapitalbank.loan.entity;
 
 import az.kapitalbank.loan.constants.FormalizationMethod;
-import az.kapitalbank.loan.constants.LeadSource;
 import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.SubProductType;
