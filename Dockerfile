@@ -6,3 +6,4 @@ COPY *.*ar .
 RUN ln -sfn *.*ar app
 ENTRYPOINT ["java", "-jar", "./app", "--spring.profiles.active=${DEPLOY_ENV}"]
 CMD [""]
+
