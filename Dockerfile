@@ -8,7 +8,3 @@ RUN ln -sfn *.*ar app
 RUN ls -la
 ENTRYPOINT ["java", "-jar", "./app", "--spring.profiles.active=${DEPLOY_ENV}"]
 CMD [""] 
-
-
-
-
