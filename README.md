@@ -4,7 +4,7 @@
 <img src="https://bitbucket.kapitalbank.az/superman-images/logo.png">
 </p>
 
-### :zap: ***Application Type:*** `Java`
+### :zap: ***Application Type:*** `JAVA`
 ### :zap: ***Namespace:*** `lead`
 ### :zap: ***Zone:*** `BankZone`
 
