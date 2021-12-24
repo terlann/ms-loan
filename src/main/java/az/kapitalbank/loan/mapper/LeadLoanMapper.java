@@ -18,12 +18,12 @@ public interface LeadLoanMapper {
     @Mapping(target = "status", ignore = true)
     LeadLoanEntity toLoanEntity(LeadLoanRequestDto leadLoanRequestDto, LeadSourceEntity leadSource);
 
-    @Mapping(target = "customerEvent.fullname", source = "leadLoanEntity.fullname")
-    @Mapping(target = "customerEvent.pincode", source = "leadLoanEntity.pincode")
-    @Mapping(target = "customerEvent.phoneNumber", source = "leadLoanEntity.phoneNumber")
-    @Mapping(target = "customerEvent.address", source = "leadLoanEntity.customerAddress")
-    @Mapping(target = "customerEvent.workplace", source = "leadLoanEntity.customerWorkplace")
-    @Mapping(target = "customerEvent.pan", source = "leadLoanEntity.customerCardPan")
+    @Mapping(target = "customer.fullname", source = "leadLoanEntity.fullname")
+    @Mapping(target = "customer.pincode", source = "leadLoanEntity.pincode")
+    @Mapping(target = "customer.phoneNumber", source = "leadLoanEntity.phoneNumber")
+    @Mapping(target = "customer.address", source = "leadLoanEntity.customerAddress")
+    @Mapping(target = "customer.workplace", source = "leadLoanEntity.customerWorkplace")
+    @Mapping(target = "customer.pan", source = "leadLoanEntity.customerCardPan")
     @Mapping(target = "mkrAndGovAgreement", source = "leadLoanEntity.isAgreement")
     @Mapping(target = "amount", source = "leadLoanEntity.productAmount")
     @Mapping(target = "duration", source = "leadLoanEntity.productDuration")
