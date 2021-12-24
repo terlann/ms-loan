@@ -13,7 +13,6 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadLoanRequestDto {
-    @NotNull
     String fullname;
     @NotNull
     String phoneNumber;
