@@ -19,7 +19,7 @@ public interface LeadLoanMapper {
     LeadLoanEntity toLoanEntity(LeadLoanRequestDto leadLoanRequestDto, LeadSourceEntity leadSource);
 
     @Mapping(target = "customer.fullName", source = "leadLoanEntity.fullname")
-    @Mapping(target = "customer.pincode", source = "leadLoanEntity.pincode")
+    @Mapping(target = "customer.pin", source = "leadLoanEntity.pincode")
     @Mapping(target = "customer.phoneNumber", source = "leadLoanEntity.phoneNumber")
     @Mapping(target = "customer.address", source = "leadLoanEntity.customerAddress")
     @Mapping(target = "customer.workplace", source = "leadLoanEntity.customerWorkplace")

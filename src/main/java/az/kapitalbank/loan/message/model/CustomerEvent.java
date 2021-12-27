@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 public class CustomerEvent {
     String cif;
     Integer pan;
-    String pincode;
+    String pin;
     String address;
     String fullName;
     String workplace;
