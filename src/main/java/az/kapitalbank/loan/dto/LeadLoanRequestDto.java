@@ -9,6 +9,9 @@ import az.kapitalbank.loan.constants.SubProductType;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
+import static az.kapitalbank.loan.constants.ProductType.NONE;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
