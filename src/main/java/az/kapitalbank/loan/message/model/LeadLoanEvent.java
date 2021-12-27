@@ -15,12 +15,12 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadLoanEvent {
-    Long id;
+    long id;
     CustomerEvent customer;
     ProductType productType;
     SubProductType subProductType;
     BigDecimal amount;
-    String duration;
+    int duration;
     String otherProcessId;
     String couponCode;
     String campaignName;

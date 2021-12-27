@@ -1,9 +1,11 @@
 package az.kapitalbank.loan.service;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 import az.kapitalbank.loan.constants.LeadStatus;
+import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
 import az.kapitalbank.loan.dto.response.WrapperResponse;
@@ -47,12 +49,16 @@ public class LeadLoanService {
             throw new SourceNotActiveException(source.get().getCode());
         }
 
+
         LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source.get());
         loanEntity.setStatus(LeadStatus.WAITING);
         loanEntity.setInsertedDate(LocalDate.now());
 
         LeadLoanEntity leadLoanEntityResult = leadLoanRepository.save(loanEntity);
         LeadLoanEvent leadLoanEvent = leadLoanMapper.toLeadLoanModel(leadLoanEntityResult, source.get());
+        if (Objects.isNull(leadLoanEvent.getProductType())) {
+            leadLoanEvent.setProductType(ProductType.NONE);
+        }
         sendLeadWithMessaging(leadLoanEvent);
         SaveLeadResponseDto saveLeadResponseDto = new SaveLeadResponseDto();
         saveLeadResponseDto.setLeadId(String.valueOf(leadLoanEntityResult.getId()));
