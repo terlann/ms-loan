@@ -20,7 +20,7 @@ public class LeadLoanEvent {
     ProductType productType;
     SubProductType subProductType;
     BigDecimal amount;
-    int duration;
+    Integer duration;
     String otherProcessId;
     String couponCode;
     String campaignName;
