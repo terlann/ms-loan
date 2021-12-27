@@ -10,11 +10,11 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerEvent {
-    String fullName;
-    String pincode;
-    String phoneNumber;
     String cif;
-    int pan;
-    String workplace;
+    Integer pan;
+    String pincode;
     String address;
+    String fullName;
+    String workplace;
+    String phoneNumber;
 }
