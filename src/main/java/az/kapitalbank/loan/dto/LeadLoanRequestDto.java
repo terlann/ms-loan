@@ -1,38 +1,35 @@
 package az.kapitalbank.loan.dto;
 
+import java.math.BigDecimal;
+import javax.validation.constraints.NotNull;
+
 import az.kapitalbank.loan.constants.FormalizationMethod;
 import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.SubProductType;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadLoanRequestDto {
     @NotNull
-    String fullname;
-    @NotNull
     String phoneNumber;
     String pincode;
+    String fullname;
     String cif;
-    String cardPan;
-    String workplace;
     String address;
+    Integer cardPan;
+    String workplace;
+    String couponCode;
+    String leadComment;
+    String campaignName;
+    Boolean isAgreement;
+    String otherProcessId;
+    BigDecimal productAmount;
+    Integer productDuration;
     ProductType productType;
     SubProductType subProductType;
     FormalizationMethod formalizationMethod;
-    BigDecimal productAmount;
-    String productDuration;
-    String otherProcessId;
-    String couponCode;
-    String campaignName;
-    String leadComment;
-    Boolean isAgreement;
 }

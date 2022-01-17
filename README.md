@@ -4,7 +4,7 @@
 <img src="https://bitbucket.kapitalbank.az/superman-images/logo.png">
 </p>
 
-### :zap: ***Application Type:*** `Java`
+### :zap: ***Application Type:*** `JAVA`
 ### :zap: ***Namespace:*** `lead`
 ### :zap: ***Zone:*** `BankZone`
 
@@ -35,8 +35,9 @@ https://semver.org/
 <img src="https://bitbucket.kapitalbank.az/superman-images/say-devops.png" width="140">  ***If something goes wrong, just text to me via Slack's `devops-team` channel.I'll assist you*** :fire:
 
 ## :question: ***How to Check App?***
-- :white_check_mark: With Kibana UI
-- :white_check_mark: With `kubectl` (Use your Kubernetes Config File)
+- :globe_with_meridians: Development URL: https://dev.ms-loan.kapitalbank.az
+- :globe_with_meridians: Preproduction URL: https://pre.ms-loan.kapitalbank.az
+- :globe_with_meridians: Production URL: https://ms-loan.kapitalbank.az
 ## :question: ***How to Check Builds?***
 - :sparkles: Jenkins URL: https://jenkins.kapitalbank.az/job/lead/job/ms-loan
 <img src="https://bitbucket.kapitalbank.az/superman-images/batman.gif" width="500">

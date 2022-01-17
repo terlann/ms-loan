@@ -1,15 +1,7 @@
 package az.kapitalbank.loan.entity;
 
-import az.kapitalbank.loan.constants.FormalizationMethod;
-import az.kapitalbank.loan.constants.LeadSource;
-import az.kapitalbank.loan.constants.LeadStatus;
-import az.kapitalbank.loan.constants.ProductType;
-import az.kapitalbank.loan.constants.SubProductType;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.FieldDefaults;
-
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,8 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.time.LocalDate;
+
+import az.kapitalbank.loan.constants.FormalizationMethod;
+import az.kapitalbank.loan.constants.LeadStatus;
+import az.kapitalbank.loan.constants.ProductType;
+import az.kapitalbank.loan.constants.SubProductType;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -53,8 +52,7 @@ public class LeadLoanEntity {
     LocalDate insertedDate;
     @Enumerated(EnumType.STRING)
     LeadStatus status;
-    @Enumerated(EnumType.STRING)
-    LeadSource source;
+    String source;
     Boolean isAgreement;
     FormalizationMethod formalizationMethod;
 }
