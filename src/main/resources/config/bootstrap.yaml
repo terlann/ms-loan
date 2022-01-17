@@ -24,6 +24,6 @@ spring:
         secret-id: ${VAULT_SECRET_ID}
         app-role-path: approle
       kv:
-        default-context: marketplace
+        default-context: lead
       connection-timeout: 10000
       read-timeout: 20000

@@ -1,4 +1,4 @@
-package az.kapitalbank.loan.dto.response;
+package az.kapitalbank.loan.message.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WrapperResponse<T> {
-    T data;
+public class LeadSource {
+    String code;
+    String name;
 }
