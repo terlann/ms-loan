@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class BaseExceptionHandling extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(SourceNotFoundException.class)
-    public ResponseEntity handleSourceNotFindException(SourceNotFoundException ex) {
+    public ResponseEntity<ExceptionModel> handleSourceNotFindException(SourceNotFoundException ex) {
         log.error("Exception - {}", ex.getMessage());
         var code = ErrorCodes.ERROR_003.getCode();
         var message = ErrorCodes.ERROR_003.getMessage();

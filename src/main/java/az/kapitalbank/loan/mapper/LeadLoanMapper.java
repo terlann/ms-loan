@@ -1,6 +1,5 @@
 package az.kapitalbank.loan.mapper;
 
-import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;

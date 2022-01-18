@@ -1,7 +1,5 @@
 package az.kapitalbank.loan.constants;
 
-import lombok.ToString;
-
 public enum ProductType {
     CASH_LOAN,
     BIRKART,
