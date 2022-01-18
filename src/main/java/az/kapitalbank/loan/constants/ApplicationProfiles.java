@@ -1,8 +1,10 @@
 package az.kapitalbank.loan.constants;
 
-public interface ApplicationProfiles {
-    String LOCAL = "local";
-    String DEV = "dev";
-    String PRE_PROD = "preprod";
-    String PROD = "prod";
+public final class ApplicationProfiles {
+    public static final String DEV = "dev";
+    public static final String PRE_PROD = "preprod";
+    public static final String PROD = "prod";
+
+    private ApplicationProfiles() {
+    }
 }

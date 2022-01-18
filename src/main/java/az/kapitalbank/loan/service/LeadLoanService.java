@@ -37,7 +37,7 @@ public class LeadLoanService {
     LeadSourceRepository leadSourceRepository;
 
     @Transactional
-    public WrapperResponse saveLead(LeadLoanRequestDto leadLoanRequestDto, String leadSource) {
+    public WrapperResponse<SaveLeadResponseDto> saveLead(LeadLoanRequestDto leadLoanRequestDto, String leadSource) {
         log.info("save lead start: Request - {}, source - [{}]", leadLoanRequestDto, leadSource);
 
         Optional<LeadSourceEntity> source = leadSourceRepository.findById(leadSource);
