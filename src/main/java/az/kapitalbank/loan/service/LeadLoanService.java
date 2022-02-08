@@ -1,9 +1,5 @@
 package az.kapitalbank.loan.service;
 
-import java.time.LocalDate;
-import java.util.Objects;
-import java.util.Optional;
-
 import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
@@ -18,6 +14,9 @@ import az.kapitalbank.loan.message.LeadLoanSender;
 import az.kapitalbank.loan.message.model.LeadLoanEvent;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
 import az.kapitalbank.loan.repository.LeadSourceRepository;
+import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -49,7 +48,6 @@ public class LeadLoanService {
             throw new SourceNotActiveException(source.get().getCode());
         }
 
-
         LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source.get());
         loanEntity.setStatus(LeadStatus.WAITING);
         loanEntity.setInsertedDate(LocalDate.now());
@@ -69,8 +67,9 @@ public class LeadLoanService {
                 .build();
     }
 
-    public void sendLeadWithMessaging(LeadLoanEvent leadLoanEvent) {
+    private void sendLeadWithMessaging(LeadLoanEvent leadLoanEvent) {
         log.info("lead send event: {}", leadLoanEvent.toString());
         leadLoanSender.sendMessage(leadLoanEvent);
     }
+
 }
