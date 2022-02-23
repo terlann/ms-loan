@@ -46,7 +46,7 @@ public class BaseExceptionHandling extends ResponseEntityExceptionHandler {
 
         var code = ErrorCodes.BAD_REQUEST.getCode();
         var message = ErrorCodes.BAD_REQUEST.getMessage();
-        var exceptionModel = ExceptionModel.of(String.valueOf(code), message, warnings);
+        var exceptionModel = ExceptionModel.of(code, message, warnings);
         return ResponseEntity.status(status).body(exceptionModel);
     }
 }
