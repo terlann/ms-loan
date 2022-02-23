@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import az.kapitalbank.loan.constants.FormalizationMethod;
 import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.SubProductType;
-import az.kapitalbank.loan.constraint.Phone;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -17,7 +16,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadLoanRequestDto {
 
-    @Phone
     @NotNull
     String phoneNumber;
     @Size(min = 7, max = 7)
@@ -32,7 +30,6 @@ public class LeadLoanRequestDto {
     String campaignName;
     Boolean isAgreement;
     String otherProcessId;
-    @NotNull
     BigDecimal productAmount;
     Integer productDuration;
     ProductType productType;
