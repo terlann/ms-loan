@@ -1,11 +1,12 @@
 package az.kapitalbank.loan.exception;
 
-import java.util.HashMap;
-import java.util.Map;
+import static nonapi.io.github.classgraph.utils.FastPathResolver.resolve;
 
 import az.kapitalbank.loan.exception.model.ErrorCodes;
 import az.kapitalbank.loan.exception.model.ExceptionModel;
 import az.kapitalbank.loan.exception.model.SourceNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import static nonapi.io.github.classgraph.utils.FastPathResolver.resolve;
 
 @Slf4j
 @RestControllerAdvice
@@ -33,16 +32,18 @@ public class BaseExceptionHandling extends ResponseEntityExceptionHandler {
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers,
-                                                                  HttpStatus status,
-                                                                  WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
         log.info(ex.toString());
         log.info(request.toString());
 
         Map<String, String> warnings = new HashMap<>();
-        for (FieldError fieldError : ex.getBindingResult().getFieldErrors())
+        for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             warnings.put(fieldError.getField(), resolve(fieldError.getDefaultMessage()));
+        }
 
         var code = ErrorCodes.BAD_REQUEST.getCode();
         var message = ErrorCodes.BAD_REQUEST.getMessage();

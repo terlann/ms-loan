@@ -15,6 +15,8 @@ import az.kapitalbank.loan.message.model.LeadLoanEvent;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
 import az.kapitalbank.loan.repository.LeadSourceRepository;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.AccessLevel;
@@ -36,7 +38,8 @@ public class LeadLoanService {
     LeadSourceRepository leadSourceRepository;
 
     @Transactional
-    public WrapperResponse<SaveLeadResponseDto> saveLead(LeadLoanRequestDto leadLoanRequestDto, String leadSource) {
+    public WrapperResponse<SaveLeadResponseDto> saveLead(LeadLoanRequestDto leadLoanRequestDto,
+                                                         String leadSource) {
         log.info("save lead start: Request - {}, source - [{}]", leadLoanRequestDto, leadSource);
 
         Optional<LeadSourceEntity> source = leadSourceRepository.findById(leadSource);
@@ -50,17 +53,19 @@ public class LeadLoanService {
 
         LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source.get());
         loanEntity.setStatus(LeadStatus.WAITING);
-        loanEntity.setInsertedDate(LocalDate.now());
+        loanEntity.setInsertedDate(LocalDateTime.now());
 
         LeadLoanEntity leadLoanEntityResult = leadLoanRepository.save(loanEntity);
-        LeadLoanEvent leadLoanEvent = leadLoanMapper.toLeadLoanModel(leadLoanEntityResult, source.get());
+        LeadLoanEvent leadLoanEvent =
+                leadLoanMapper.toLeadLoanModel(leadLoanEntityResult, source.get());
         if (Objects.isNull(leadLoanEvent.getProductType())) {
             leadLoanEvent.setProductType(ProductType.NONE);
         }
         sendLeadWithMessaging(leadLoanEvent);
         SaveLeadResponseDto saveLeadResponseDto = new SaveLeadResponseDto();
         saveLeadResponseDto.setLeadId(String.valueOf(leadLoanEntityResult.getId()));
-        log.info("save lead finish: Request - {}, lead-id - [{}]", leadLoanRequestDto, leadLoanEntityResult.getId());
+        log.info("save lead finish: Request - {}, lead-id - [{}]", leadLoanRequestDto,
+                leadLoanEntityResult.getId());
 
         return WrapperResponse.<SaveLeadResponseDto>builder()
                 .data(saveLeadResponseDto)

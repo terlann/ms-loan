@@ -1,9 +1,8 @@
 package az.kapitalbank.loan.message;
 
+import az.kapitalbank.loan.message.model.LeadLoanEvent;
 import java.util.LinkedList;
 import java.util.function.Supplier;
-
-import az.kapitalbank.loan.message.model.LeadLoanEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
@@ -27,7 +26,8 @@ public class LeadLoanSender {
     private Supplier<Message<LeadLoanEvent>> produceLead() {
         return () -> {
             if (leadLoanEventLinkedList.peek() != null) {
-                Message<LeadLoanEvent> message = MessageBuilder.withPayload(leadLoanEventLinkedList.peek()).build();
+                Message<LeadLoanEvent> message =
+                        MessageBuilder.withPayload(leadLoanEventLinkedList.peek()).build();
                 leadLoanEventLinkedList.poll();
                 log.info("lead send to optimus SUCCESS. Message - {}", message.getPayload());
                 return message;
