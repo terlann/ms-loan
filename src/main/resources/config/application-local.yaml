@@ -3,11 +3,11 @@ spring:
     stream:
       bindings:
         produceLead-out-0:
-            destination: hot-lead-integration-loan
+          destination: hot-lead-integration-loan
       kafka:
         binder:
-           minPartitionCount: 3
-           brokers: 10.0.81.59:9092
+          minPartitionCount: 3
+          brokers: 10.0.81.59:9092
   datasource:
     url: jdbc:oracle:thin:@//172.21.14.34:1521/ldb
     username: LEAD_HOT
@@ -18,3 +18,7 @@ spring:
 
 server:
   port: 8083
+
+loan:
+  sql:
+    sources: "0008"
