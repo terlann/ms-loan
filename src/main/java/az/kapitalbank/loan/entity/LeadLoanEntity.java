@@ -1,7 +1,11 @@
 package az.kapitalbank.loan.entity;
 
+import az.kapitalbank.loan.constants.FormalizationMethod;
+import az.kapitalbank.loan.constants.LeadStatus;
+import az.kapitalbank.loan.constants.ProductType;
+import az.kapitalbank.loan.constants.SubProductType;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,11 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import az.kapitalbank.loan.constants.FormalizationMethod;
-import az.kapitalbank.loan.constants.LeadStatus;
-import az.kapitalbank.loan.constants.ProductType;
-import az.kapitalbank.loan.constants.SubProductType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +28,8 @@ public class LeadLoanEntity {
     static final String TABLE_NAME = "LEAD_LOAN";
 
     @Id
-    @SequenceGenerator(name = "gen_seq_lead_loan", sequenceName = "seq_lead_loan", allocationSize = 1)
+    @SequenceGenerator(name = "gen_seq_lead_loan",
+            sequenceName = "seq_lead_loan", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_seq_lead_loan")
     Long id;
     String fullname;
@@ -49,7 +49,7 @@ public class LeadLoanEntity {
     String couponCode;
     String otherProcessId;
     String leadComment;
-    LocalDate insertedDate;
+    LocalDateTime insertedDate;
     @Enumerated(EnumType.STRING)
     LeadStatus status;
     String source;

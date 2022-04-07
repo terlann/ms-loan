@@ -1,11 +1,10 @@
 package az.kapitalbank.loan.controller;
 
-import javax.validation.Valid;
-
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
 import az.kapitalbank.loan.dto.response.WrapperResponse;
 import az.kapitalbank.loan.service.LeadLoanService;
+import javax.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -24,9 +23,11 @@ public class LeadLoanController {
     final LeadLoanService leadLoanService;
 
     @PostMapping
-    public ResponseEntity<WrapperResponse<SaveLeadResponseDto>> addLead(@Valid @RequestBody LeadLoanRequestDto request,
-                                     @RequestHeader("X-lEAD-SOURCE") String source) {
-        WrapperResponse<SaveLeadResponseDto> wrapperResponse = leadLoanService.saveLead(request, source);
+    public ResponseEntity<WrapperResponse<SaveLeadResponseDto>> addLead(
+            @Valid @RequestBody LeadLoanRequestDto request,
+            @RequestHeader("X-lEAD-SOURCE") String source) {
+        WrapperResponse<SaveLeadResponseDto> wrapperResponse =
+                leadLoanService.saveLead(request, source);
         return ResponseEntity.ok(wrapperResponse);
     }
 
