@@ -1,12 +1,11 @@
 package az.kapitalbank.loan.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
-
 import az.kapitalbank.loan.constants.FormalizationMethod;
 import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.SubProductType;
+import java.math.BigDecimal;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -23,7 +22,7 @@ public class LeadLoanRequestDto {
     String fullname;
     String cif;
     String address;
-    Integer cardPan;
+    String cardPan;
     String workplace;
     String couponCode;
     String leadComment;

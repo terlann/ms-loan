@@ -1,7 +1,6 @@
 package az.kapitalbank.loan.exception.model;
 
 import java.util.Map;
-
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;

@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public enum LeadStatus {
     WAITING("waiting"),
+    SENDING("Sending"),
     SUCCESS("success"),
     DELETED("deleted"),
     ERROR("error");
