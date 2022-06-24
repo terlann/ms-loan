@@ -21,7 +21,7 @@ spring:
           checkFraudResult-in-0:
             binder: kafka-atlas
             contentType: application/json
-            group: sales-channel-online-state
+            group: sale-channel-online-state
             destination: sale-channel-8196
   datasource:
     url: jdbc:oracle:thin:@//172.21.14.34:1521/ldb
