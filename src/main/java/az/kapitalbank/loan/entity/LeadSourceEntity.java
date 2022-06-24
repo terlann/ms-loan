@@ -4,15 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @Entity
-@SuperBuilder
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = LeadSourceEntity.TABLE_NAME)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadSourceEntity {
