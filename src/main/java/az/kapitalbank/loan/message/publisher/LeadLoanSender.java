@@ -1,4 +1,4 @@
-package az.kapitalbank.loan.message;
+package az.kapitalbank.loan.message.publisher;
 
 import az.kapitalbank.loan.message.model.LeadLoanEvent;
 import java.util.LinkedList;

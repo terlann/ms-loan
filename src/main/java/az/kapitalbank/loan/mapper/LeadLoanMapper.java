@@ -4,6 +4,7 @@ import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
 import az.kapitalbank.loan.message.model.LeadLoanEvent;
+import az.kapitalbank.loan.message.model.SalesChannel8196Event;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -29,6 +30,11 @@ public interface LeadLoanMapper {
     @Mapping(target = "source.code", source = "leadSourceEntity.code")
     @Mapping(target = "source.name", source = "leadSourceEntity.name")
     LeadLoanEvent toLeadLoanModel(LeadLoanEntity leadLoanEntity, LeadSourceEntity leadSourceEntity);
+
+    @Mapping(target = "phoneNumber",source = "salesChannel8196Event.cnsAddress")
+    LeadLoanRequestDto toLeadLoanRequestDto(SalesChannel8196Event salesChannel8196Event);
+
+
 
 
 }

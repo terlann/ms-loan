@@ -1,0 +1,31 @@
+package az.kapitalbank.loan.message.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
+
+@Data
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class SalesChannel8196Event {
+    @JsonProperty("ID")
+    Integer id;
+    @JsonProperty("STATUS")
+    Integer status;
+    @JsonProperty("DECLINEREASON")
+    Integer declineReason;
+    @JsonProperty("ORIGTIME")
+    Integer origTime;
+    @JsonProperty("RECEIVETIME")
+    Integer receiveTime;
+    @JsonProperty("CNSADDRESS")
+    String cnsAddress;
+    @JsonProperty("CHANNEL")
+    String channel;
+    @JsonProperty("CMDTEXT")
+    String cmdText;
+    @JsonProperty("ERRORMESSAGE")
+    String errorMessage;
+}

@@ -88,8 +88,20 @@ sonarqube {
         property "sonar.host.url", "https://sonarqube.kapitalbank.az"
         property "sonar.scm.forceReloadAll", "true"
         property "sonar.java.checkstyle.reportPaths", "build/reports/checkstyle/main.xml"
-        property "sonar.coverage.exclusions", "**/az/kapitalbank/ms/***"
-        property "sonar.cpd.exclusions", "**/az/kapitalbank/ms/**"
+        property "sonar.cpd.exclusions", "**/az/kapitalbank/loan/**"
+        property "sonar.coverage.exclusions",
+                "**/az/kapitalbank/loan/config/**," +
+                        "**/az/kapitalbank/loan/constants/**," +
+                        "**/az/kapitalbank/loan/controller/**," +
+                        "**/az/kapitalbank/loan/dto/**," +
+                        "**/az/kapitalbank/loan/entity/**," +
+                        "**/az/kapitalbank/loan/exception/**," +
+                        "**/az/kapitalbank/loan/mapper/**," +
+                        "**/az/kapitalbank/loan/message/**," +
+                        "**/az/kapitalbank/loan/repository/**," +
+                        "**/az/kapitalbank/loan/scheduler/**," +
+                        "**/az/kapitalbank/loan/Application.java"
+
     }
 }
 jacoco {
