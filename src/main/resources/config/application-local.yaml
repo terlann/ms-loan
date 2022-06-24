@@ -13,12 +13,12 @@ spring:
             environment.spring.cloud.stream.kafka.binder:
               brokers: globalsearch_kafka_zookeeper01.kapitalbank.az:9092,globalsearch_kafka_zookeeper02.kapitalbank.az:9092,globalsearch_kafka_zookeeper03.kapitalbank.az:9092
         bindings:
-          checkFraud-out-0:
+          produceLead-out-0:
             binder: kafka-optimus
             contentType: application/json
             group: loan-lead-group
             destination: hot-lead-integration-loan
-          checkFraudResult-in-0:
+          salesChannelResult-in-0:
             binder: kafka-atlas
             contentType: application/json
             group: sale-channel-online-state
