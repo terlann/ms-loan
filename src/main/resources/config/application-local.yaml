@@ -2,27 +2,27 @@ spring:
   cloud:
     function:
       definition: produceLead,salesChannelResult
-      stream:
-        binders:
-          kafka-optimus:
-            type: kafka
-            environment.spring.cloud.stream.kafka.binder:
-              brokers: 10.0.81.59:9092
-          kafka-atlas:
-            type: kafka
-            environment.spring.cloud.stream.kafka.binder:
-              brokers: globalsearch_kafka_zookeeper01.kapitalbank.az:9092,globalsearch_kafka_zookeeper02.kapitalbank.az:9092,globalsearch_kafka_zookeeper03.kapitalbank.az:9092
-        bindings:
-          produceLead-out-0:
-            binder: kafka-optimus
-            contentType: application/json
-            group: loan-lead-group
-            destination: hot-lead-integration-loan
-          salesChannelResult-in-0:
-            binder: kafka-atlas
-            contentType: application/json
-            group: sale-channel-8196
-            destination: sale-channel-8196
+    stream:
+      binders:
+        kafka-optimus:
+          type: kafka
+          environment.spring.cloud.stream.kafka.binder:
+            brokers: 10.0.81.59:9092
+        kafka-atlas:
+          type: kafka
+          environment.spring.cloud.stream.kafka.binder:
+            brokers: globalsearch_kafka_zookeeper01.kapitalbank.az:9092,globalsearch_kafka_zookeeper02.kapitalbank.az:9092,globalsearch_kafka_zookeeper03.kapitalbank.az:9092
+      bindings:
+        produceLead-out-0:
+          binder: kafka-optimus
+          contentType: application/json
+          group: loan-lead-group
+          destination: hot-lead-integration-loan
+        salesChannelResult-in-0:
+          binder: kafka-atlas
+          contentType: application/json
+          group: sale-channel-8196
+          destination: sale-channel-8196
   datasource:
     url: jdbc:oracle:thin:@//172.21.14.34:1521/ldb
     username: LEAD_HOT
