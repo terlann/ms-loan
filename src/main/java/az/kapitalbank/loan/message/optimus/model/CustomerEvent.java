@@ -1,4 +1,4 @@
-package az.kapitalbank.loan.message.model;
+package az.kapitalbank.loan.message.optimus.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;

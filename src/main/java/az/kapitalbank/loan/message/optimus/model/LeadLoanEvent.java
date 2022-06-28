@@ -1,4 +1,4 @@
-package az.kapitalbank.loan.message.model;
+package az.kapitalbank.loan.message.optimus.model;
 
 import az.kapitalbank.loan.constants.FormalizationMethod;
 import az.kapitalbank.loan.constants.ProductType;

@@ -1,4 +1,4 @@
-package az.kapitalbank.loan.message.model;
+package az.kapitalbank.loan.message.telesales.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SalesChannel8196Event {
+public class LeadLoanEvent {
     @JsonProperty("ID")
     Integer id;
     @JsonProperty("STATUS")
