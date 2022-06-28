@@ -26,7 +26,7 @@ public class LeadLoanListener {
     public Consumer<LeadLoanEvent> salesChannelResult() {
         return event -> {
             if (Objects.nonNull(event)) {
-                log.info("Sales channel 8196 event onsumer is started. Event - {}", event);
+                log.info("Sales channel 8196 event consumer is started. Event - {}", event);
                 leadLoanService.saveLead(leadLoanMapper.toLeadLoanRequestDto(event), SOURCE_8196);
             }
         };
