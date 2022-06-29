@@ -9,8 +9,8 @@ import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
 import az.kapitalbank.loan.mapper.LeadLoanMapper;
-import az.kapitalbank.loan.message.LeadLoanSender;
-import az.kapitalbank.loan.message.model.LeadLoanEvent;
+import az.kapitalbank.loan.message.optimus.model.LeadLoanEvent;
+import az.kapitalbank.loan.message.optimus.publisher.LeadLoanSender;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
 import az.kapitalbank.loan.repository.LeadSourceRepository;
 import java.util.List;
@@ -42,16 +42,19 @@ class LoanSchedulerTest {
     void sendToKafkaFromDb() {
         ReflectionTestUtils.setField(loanScheduler, "sources", sources);
 
-        var leadSource = new LeadSourceEntity();
-        leadSource.setName("8196");
-        leadSource.setCode("0008");
+        var leadSource = LeadSourceEntity.builder()
+                .name("8196")
+                .code("0008")
+                .build();
 
         when(sourceRepository.findById(sources.get(0)))
                 .thenReturn(Optional.of(leadSource));
 
-        var leadLoanEntity = new LeadLoanEntity();
-        leadLoanEntity.setSource("0008");
-        leadLoanEntity.setPhoneNumber("num");
+        var leadLoanEntity = LeadLoanEntity.builder()
+                .source("0008")
+                .phoneNumber("num")
+                .build();
+
 
         when(leadLoanRepository.findBySourceAndStatusIsNot(sources.get(0), LeadStatus.SENDING))
                 .thenReturn(List.of(leadLoanEntity));
