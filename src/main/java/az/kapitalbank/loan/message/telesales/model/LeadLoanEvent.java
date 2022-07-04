@@ -15,7 +15,7 @@ public class LeadLoanEvent {
     @JsonProperty("STATUS")
     Integer status;
     @JsonProperty("DECLINEREASON")
-    Long declineReason;
+    Integer declineReason;
     @JsonProperty("ORIGTIME")
     Long origTime;
     @JsonProperty("RECEIVETIME")
