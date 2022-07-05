@@ -11,15 +11,15 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadLoanEvent {
     @JsonProperty("ID")
-    Integer id;
+    Long id;
     @JsonProperty("STATUS")
     Integer status;
     @JsonProperty("DECLINEREASON")
     Integer declineReason;
     @JsonProperty("ORIGTIME")
-    Integer origTime;
+    Long origTime;
     @JsonProperty("RECEIVETIME")
-    Integer receiveTime;
+    Long receiveTime;
     @JsonProperty("CNSADDRESS")
     String cnsAddress;
     @JsonProperty("CHANNEL")
