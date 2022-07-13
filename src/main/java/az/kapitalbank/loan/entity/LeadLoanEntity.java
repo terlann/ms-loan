@@ -61,6 +61,4 @@ public class LeadLoanEntity {
     String source;
     Boolean isAgreement;
     FormalizationMethod formalizationMethod;
-    BigDecimal monthlyPayment;
-    String umicoUserId;
 }
