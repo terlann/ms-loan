@@ -28,6 +28,4 @@ public class LeadLoanEvent {
     Boolean mkrAndGovAgreement;
     LocalDateTime insertedDate;
     FormalizationMethod formalizationMethod;
-    BigDecimal monthlyPayment;
-    String umicoUserId;
 }
