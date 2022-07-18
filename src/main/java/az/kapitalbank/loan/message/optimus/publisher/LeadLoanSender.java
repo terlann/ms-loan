@@ -1,6 +1,6 @@
-package az.kapitalbank.loan.message;
+package az.kapitalbank.loan.message.optimus.publisher;
 
-import az.kapitalbank.loan.message.model.LeadLoanEvent;
+import az.kapitalbank.loan.message.optimus.model.LeadLoanEvent;
 import java.util.LinkedList;
 import java.util.function.Supplier;
 import lombok.extern.slf4j.Slf4j;
