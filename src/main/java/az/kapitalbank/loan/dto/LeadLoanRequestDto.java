@@ -40,4 +40,6 @@ public class LeadLoanRequestDto {
     ProductType productType;
     SubProductType subProductType;
     FormalizationMethod formalizationMethod;
+    BigDecimal monthlyPayment;
+    String umicoUserId;
 }
