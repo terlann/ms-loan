@@ -6,13 +6,13 @@ import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.SubProductType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -21,6 +21,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
@@ -28,16 +30,15 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = LeadLoanEntity.TABLE_NAME)
+@Table(name = "KB_LEAD_LOAN")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadLoanEntity {
-    static final String TABLE_NAME = "LEAD_LOAN";
-
     @Id
-    @SequenceGenerator(name = "gen_seq_lead_loan",
-            sequenceName = "seq_lead_loan", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen_seq_lead_loan")
-    Long id;
+    @Type(type = "uuid-char")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(updatable = false, nullable = false)
+    UUID id;
     String fullname;
     String pincode;
     String phoneNumber;

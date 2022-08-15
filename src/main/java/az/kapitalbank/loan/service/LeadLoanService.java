@@ -61,7 +61,7 @@ public class LeadLoanService {
         }
         sendLeadWithMessaging(leadLoanEvent);
         SaveLeadResponseDto saveLeadResponseDto = new SaveLeadResponseDto();
-        saveLeadResponseDto.setLeadId(String.valueOf(leadLoanEntityResult.getId()));
+        saveLeadResponseDto.setLeadId(leadLoanEntityResult.getId().toString());
         log.info("save lead finish: Request - {}, lead-id - [{}]", leadLoanRequestDto,
                 leadLoanEntityResult.getId());
 
