@@ -6,7 +6,6 @@ import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.SubProductType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +21,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
@@ -34,11 +32,10 @@ import org.hibernate.annotations.Type;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadLoanEntity {
     @Id
-    @Type(type = "uuid-char")
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(updatable = false, nullable = false)
-    UUID id;
+    String id;
     String fullname;
     String pincode;
     String phoneNumber;
