@@ -28,6 +28,7 @@ public interface LeadLoanMapper {
     @Mapping(target = "duration", source = "leadLoanEntity.productDuration")
     @Mapping(target = "source.code", source = "leadSourceEntity.code")
     @Mapping(target = "source.name", source = "leadSourceEntity.name")
+    @Mapping(target = "comment", source = "leadLoanEntity.leadComment")
     az.kapitalbank.loan.message.optimus.model.LeadLoanEvent toLeadLoanModel(
             LeadLoanEntity leadLoanEntity, LeadSourceEntity leadSourceEntity);
 
