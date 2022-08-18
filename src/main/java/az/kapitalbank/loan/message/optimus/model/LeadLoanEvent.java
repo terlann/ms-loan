@@ -24,7 +24,7 @@ public class LeadLoanEvent {
     String couponCode;
     String campaignName;
     LeadSource source;
-    String leadComment;
+    String comment;
     Boolean mkrAndGovAgreement;
     LocalDateTime insertedDate;
     FormalizationMethod formalizationMethod;
