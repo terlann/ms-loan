@@ -5,7 +5,7 @@ spring:
     active: ${DEPLOY_ENV}
   cloud:
     consul:
-      host: consul.kapitalbank.az
+      host: consul-dr.kapitalbank.az
       port: 8500
       config:
         enabled: true
@@ -14,7 +14,7 @@ spring:
         profile-separator: '-'
         prefixes: config/lead/${spring.application.name}
     vault:
-      host: vault.kapitalbank.az
+      host: vault-dr.kapitalbank.az
       port: 8200
       scheme: http
       fail-fast: true
