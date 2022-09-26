@@ -96,7 +96,7 @@ class LeadLoanServiceTest {
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
                 .build();
         when(leadSourceRepository.findById(leadSource)).thenReturn(
-                Optional.of(leadSourceEntity));
+                Optional.empty());
         assertThrows(CommonException.class,
                 () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
         verify(leadSourceRepository).findById(leadSource);
@@ -115,6 +115,23 @@ class LeadLoanServiceTest {
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.ofNullable(leadLoanEntity));
         leadLoanService.updateleadStatus(leadStatusEvent);
+        verify(leadLoanRepository).findById(leadLoanEntity.getId());
+    }
+
+    @Test
+    void updateLeadStatusException() {
+        var leadLoanEntity = LeadLoanEntity.builder()
+                .id("85c0407c-3d94-11ed-b878-0242ac120002")
+                .status(LeadStatus.WAITING)
+                .build();
+        var leadStatusEvent = LeadStatusEvent.builder()
+                .id("85c0407c-3d94-11ed-b878-0242ac120002")
+                .leadStatus(LeadStatus.OPTIMUS_ACCEPTED)
+                .build();
+        when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
+                Optional.empty());
+        assertThrows(CommonException.class,
+                () -> leadLoanService.updateleadStatus(leadStatusEvent));
         verify(leadLoanRepository).findById(leadLoanEntity.getId());
     }
 }
