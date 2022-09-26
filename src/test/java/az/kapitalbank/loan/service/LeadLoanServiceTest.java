@@ -8,8 +8,10 @@ import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
 import az.kapitalbank.loan.mapper.LeadLoanMapper;
+import az.kapitalbank.loan.message.optimus.listener.LeadStatusListener;
 import az.kapitalbank.loan.message.optimus.model.LeadLoanEvent;
 import az.kapitalbank.loan.message.optimus.model.LeadSource;
+import az.kapitalbank.loan.message.optimus.model.LeadStatusEvent;
 import az.kapitalbank.loan.message.optimus.publisher.LeadLoanSender;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
 import az.kapitalbank.loan.repository.LeadSourceRepository;
@@ -31,6 +33,8 @@ class LeadLoanServiceTest {
     LeadLoanSender leadLoanSender;
     @Mock
     LeadSourceRepository leadSourceRepository;
+    @Mock
+    LeadStatusListener leadStatusListener;
     @InjectMocks
     LeadLoanService leadLoanService;
 
@@ -64,5 +68,21 @@ class LeadLoanServiceTest {
 
         leadLoanService.saveLead(leadLoanRequestDto, leadSource);
         verify(leadSourceRepository).findById(leadSource);
+    }
+
+    @Test
+    void updateLeadStatusSuccess() {
+        var leadLoanEntity = LeadLoanEntity.builder()
+                .id("22fd0b7c-3d8b-11ed-b878-0242ac120002")
+                .status(LeadStatus.WAITING)
+                .build();
+        var leadStatusEvent = LeadStatusEvent.builder()
+                .id(leadLoanEntity.getId())
+                .leadStatus(LeadStatus.OPTIMUS_ACCEPTED)
+                .build();
+        when(leadLoanRepository.findById(leadLoanEntity.getId())).thenReturn(
+                Optional.ofNullable(leadLoanEntity));
+        leadLoanService.updateleadStatus(leadStatusEvent);
+        verify(leadLoanRepository).findById(leadLoanEntity.getId());
     }
 }

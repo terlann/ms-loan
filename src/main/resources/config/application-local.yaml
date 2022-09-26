@@ -8,6 +8,9 @@ spring:
           type: kafka
           environment.spring.cloud.stream.kafka.binder:
             brokers: localhost:9092
+            auto-create-topics: true
+            auto-add-partitions: true
+            min-partition-count: 1
         kafka-atlas:
           type: kafka
           environment.spring.cloud.stream.kafka.binder:
@@ -23,6 +26,11 @@ spring:
           contentType: application/json
           group: sale-channel-8196
           destination: sale-channel-8196
+        leadStatusResult-in-0:
+          binder: kafka-optimus
+          contentType: application/json
+          group: loan-lead-status-group
+          destination: hot-lead-integration-loan-status
   datasource:
     url: jdbc:oracle:thin:@//172.21.14.34:1521/ldb
     username: LEAD_HOT

@@ -1,5 +1,6 @@
 package az.kapitalbank.loan.service;
 
+import az.kapitalbank.loan.constants.Error;
 import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
@@ -7,16 +8,15 @@ import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
 import az.kapitalbank.loan.dto.response.WrapperResponse;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
-import az.kapitalbank.loan.exception.model.SourceNotActiveException;
-import az.kapitalbank.loan.exception.model.SourceNotFoundException;
+import az.kapitalbank.loan.exception.CommonException;
 import az.kapitalbank.loan.mapper.LeadLoanMapper;
 import az.kapitalbank.loan.message.optimus.model.LeadLoanEvent;
+import az.kapitalbank.loan.message.optimus.model.LeadStatusEvent;
 import az.kapitalbank.loan.message.optimus.publisher.LeadLoanSender;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
 import az.kapitalbank.loan.repository.LeadSourceRepository;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -40,22 +40,24 @@ public class LeadLoanService {
                                                          String leadSource) {
         log.info("save lead start: Request - {}, source - [{}]", leadLoanRequestDto, leadSource);
 
-        Optional<LeadSourceEntity> source = leadSourceRepository.findById(leadSource);
-        if (source.isEmpty()) {
-            throw new SourceNotFoundException(leadSource);
+        LeadSourceEntity source = leadSourceRepository.findById(leadSource).orElseThrow(
+                () -> new CommonException(Error.SOURCE_NOT_FOUND_EXCEPTION,
+                        "Source not found exception : mobileNumber - "
+                                + leadLoanRequestDto.getPhoneNumber()));
+
+        if (!source.isStatus()) {
+            throw new CommonException(Error.SOURCE_NOT_ACTIVE_EXCEPTION,
+                    "Source not active exception - "
+                            + leadLoanRequestDto.getPhoneNumber());
         }
 
-        if (!source.get().isStatus()) {
-            throw new SourceNotActiveException(source.get().getCode());
-        }
-
-        LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source.get());
+        LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source);
         loanEntity.setStatus(LeadStatus.WAITING);
         loanEntity.setInsertedDate(LocalDateTime.now());
 
         LeadLoanEntity leadLoanEntityResult = leadLoanRepository.save(loanEntity);
         LeadLoanEvent leadLoanEvent =
-                leadLoanMapper.toLeadLoanModel(leadLoanEntityResult, source.get());
+                leadLoanMapper.toLeadLoanModel(leadLoanEntityResult, source);
         if (Objects.isNull(leadLoanEvent.getProductType())) {
             leadLoanEvent.setProductType(ProductType.NONE);
         }
@@ -73,6 +75,17 @@ public class LeadLoanService {
     private void sendLeadWithMessaging(LeadLoanEvent leadLoanEvent) {
         log.info("lead send event: {}", leadLoanEvent.toString());
         leadLoanSender.sendMessage(leadLoanEvent);
+    }
+
+    public void updateleadStatus(LeadStatusEvent leadStatusEvent) {
+        log.info("Start lead status update. leadStatusEvent: {}", leadStatusEvent);
+        var leadLoenEntity = leadLoanRepository.findById(leadStatusEvent.getId())
+                .orElseThrow(() -> new CommonException(
+                        Error.LEAD_NOT_FOUND,
+                        "Error Not Found : leadId - "
+                                + leadStatusEvent.getId()));
+        leadLoenEntity.setStatus(leadStatusEvent.getLeadStatus());
+        leadLoanRepository.save(leadLoenEntity);
     }
 
 }

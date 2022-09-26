@@ -1,9 +1,6 @@
-package az.kapitalbank.loan.message.telesales.listener;
+package az.kapitalbank.loan.message.optimus.listener;
 
-import static az.kapitalbank.loan.constants.SalesChannel.SOURCE_8196;
-
-import az.kapitalbank.loan.mapper.LeadLoanMapper;
-import az.kapitalbank.loan.message.telesales.model.LeadLoanEvent;
+import az.kapitalbank.loan.message.optimus.model.LeadStatusEvent;
 import az.kapitalbank.loan.service.LeadLoanService;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -18,16 +15,16 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class LeadLoanListener {
+public class LeadStatusListener {
+
     LeadLoanService leadLoanService;
-    LeadLoanMapper leadLoanMapper;
 
     @Bean
-    public Consumer<LeadLoanEvent> salesChannelResult() {
+    public Consumer<LeadStatusEvent> leadStatusResult() {
         return event -> {
             if (Objects.nonNull(event)) {
-                log.info("Sales channel 8196 event consumer is started. Event - {}", event);
-                leadLoanService.saveLead(leadLoanMapper.toLeadLoanRequestDto(event), SOURCE_8196);
+                log.info("Optimus result lead status event consumer is started. Event - {}", event);
+                leadLoanService.updateleadStatus(event);
             }
         };
     }

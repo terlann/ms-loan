@@ -15,6 +15,9 @@ public enum LeadStatus {
     SENDING("Sending"),
     SUCCESS("success"),
     DELETED("deleted"),
+    OPTIMUS_REJECTED("optimus_rejected"),
+    OPTIMUS_ERROR("optuimus_error"),
+    OPTIMUS_ACCEPTED("optimus_accepted"),
     ERROR("error");
 
     String status;
