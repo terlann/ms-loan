@@ -1,5 +1,6 @@
 package az.kapitalbank.loan.message.optimus.listener;
 
+import az.kapitalbank.loan.mapper.LeadLoanMapper;
 import az.kapitalbank.loan.message.optimus.model.LeadStatusEvent;
 import az.kapitalbank.loan.service.LeadLoanService;
 import java.util.Objects;
@@ -18,13 +19,14 @@ import org.springframework.stereotype.Component;
 public class LeadStatusListener {
 
     LeadLoanService leadLoanService;
+    LeadLoanMapper leadLoanMapper;
 
     @Bean
     public Consumer<LeadStatusEvent> leadStatusResult() {
         return event -> {
             if (Objects.nonNull(event)) {
                 log.info("Optimus result lead status event consumer is started. Event - {}", event);
-                leadLoanService.updateLeadStatus(event);
+                leadLoanService.updateLeadStatus(leadLoanMapper.toLeadStatusDto(event));
             }
         };
     }

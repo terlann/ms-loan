@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
+import az.kapitalbank.loan.dto.LeadStatusDto;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
 import az.kapitalbank.loan.exception.CommonException;
@@ -13,7 +14,6 @@ import az.kapitalbank.loan.mapper.LeadLoanMapper;
 import az.kapitalbank.loan.message.optimus.listener.LeadStatusListener;
 import az.kapitalbank.loan.message.optimus.model.LeadLoanEvent;
 import az.kapitalbank.loan.message.optimus.model.LeadSource;
-import az.kapitalbank.loan.message.optimus.model.LeadStatusEvent;
 import az.kapitalbank.loan.message.optimus.publisher.LeadLoanSender;
 import az.kapitalbank.loan.repository.LeadLoanRepository;
 import az.kapitalbank.loan.repository.LeadSourceRepository;
@@ -108,13 +108,13 @@ class LeadLoanServiceTest {
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
                 .status(LeadStatus.WAITING)
                 .build();
-        var leadStatusEvent = LeadStatusEvent.builder()
+        var leadStatusDto = LeadStatusDto.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
                 .leadStatus(LeadStatus.OPTIMUS_ACCEPTED)
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.ofNullable(leadLoanEntity));
-        leadLoanService.updateLeadStatus(leadStatusEvent);
+        leadLoanService.updateLeadStatus(leadStatusDto);
         verify(leadLoanRepository).findById(leadLoanEntity.getId());
     }
 
@@ -124,14 +124,14 @@ class LeadLoanServiceTest {
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
                 .status(LeadStatus.WAITING)
                 .build();
-        var leadStatusEvent = LeadStatusEvent.builder()
+        var leadStatusDto = LeadStatusDto.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
                 .leadStatus(LeadStatus.OPTIMUS_ACCEPTED)
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.empty());
         assertThrows(CommonException.class,
-                () -> leadLoanService.updateLeadStatus(leadStatusEvent));
+                () -> leadLoanService.updateLeadStatus(leadStatusDto));
         verify(leadLoanRepository).findById(leadLoanEntity.getId());
     }
 }
