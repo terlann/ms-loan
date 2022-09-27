@@ -77,15 +77,15 @@ public class LeadLoanService {
         leadLoanSender.sendMessage(leadLoanEvent);
     }
 
-    public void updateleadStatus(LeadStatusEvent leadStatusEvent) {
-        log.info("Start lead status update. leadStatusEvent: {}", leadStatusEvent);
-        var leadLoenEntity = leadLoanRepository.findById(leadStatusEvent.getId())
+    public void updateLeadStatus(LeadStatusEvent leadStatusEvent) {
+        log.info("Lead status update process was started. leadId: {}", leadStatusEvent.getId());
+        var leadLoanEntity = leadLoanRepository.findById(leadStatusEvent.getId())
                 .orElseThrow(() -> new CommonException(
                         Error.LEAD_NOT_FOUND,
                         "Error Not Found : leadId - "
                                 + leadStatusEvent.getId()));
-        leadLoenEntity.setStatus(leadStatusEvent.getLeadStatus());
-        leadLoanRepository.save(leadLoenEntity);
+        leadLoanEntity.setStatus(leadStatusEvent.getLeadStatus());
+        leadLoanRepository.save(leadLoanEntity);
     }
 
 }

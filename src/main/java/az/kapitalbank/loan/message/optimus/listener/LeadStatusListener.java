@@ -24,7 +24,7 @@ public class LeadStatusListener {
         return event -> {
             if (Objects.nonNull(event)) {
                 log.info("Optimus result lead status event consumer is started. Event - {}", event);
-                leadLoanService.updateleadStatus(event);
+                leadLoanService.updateLeadStatus(event);
             }
         };
     }

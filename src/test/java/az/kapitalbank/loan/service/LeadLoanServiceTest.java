@@ -114,7 +114,7 @@ class LeadLoanServiceTest {
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.ofNullable(leadLoanEntity));
-        leadLoanService.updateleadStatus(leadStatusEvent);
+        leadLoanService.updateLeadStatus(leadStatusEvent);
         verify(leadLoanRepository).findById(leadLoanEntity.getId());
     }
 
@@ -131,7 +131,7 @@ class LeadLoanServiceTest {
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.empty());
         assertThrows(CommonException.class,
-                () -> leadLoanService.updateleadStatus(leadStatusEvent));
+                () -> leadLoanService.updateLeadStatus(leadStatusEvent));
         verify(leadLoanRepository).findById(leadLoanEntity.getId());
     }
 }
