@@ -47,7 +47,7 @@ public class LeadLoanService {
 
         if (!source.isStatus()) {
             throw new CommonException(Error.SOURCE_NOT_ACTIVE_EXCEPTION,
-                    "Source not active exception - "
+                    "Source not active exception: phoneNumber - "
                             + leadLoanRequestDto.getPhoneNumber());
         }
 
@@ -82,7 +82,7 @@ public class LeadLoanService {
         var leadLoanEntity = leadLoanRepository.findById(leadStatusDto.getId())
                 .orElseThrow(() -> new CommonException(
                         Error.LEAD_NOT_FOUND,
-                        "Error Not Found : leadId - "
+                        "Lead Not Found : leadId - "
                                 + leadStatusDto.getId()));
         leadLoanEntity.setStatus(leadStatusDto.getLeadStatus());
         leadLoanRepository.save(leadLoanEntity);
