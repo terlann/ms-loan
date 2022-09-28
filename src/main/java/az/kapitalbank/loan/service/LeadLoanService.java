@@ -77,6 +77,7 @@ public class LeadLoanService {
         leadLoanSender.sendMessage(leadLoanEvent);
     }
 
+    @Transactional
     public void updateLeadStatus(LeadStatusDto leadStatusDto) {
         log.info("Lead status update process was started. leadStatusEvent: {}", leadStatusDto);
         var leadLoanEntity = leadLoanRepository.findById(leadStatusDto.getId())
@@ -85,7 +86,6 @@ public class LeadLoanService {
                         "Lead Not Found : leadId - "
                                 + leadStatusDto.getId()));
         leadLoanEntity.setStatus(leadStatusDto.getLeadStatus());
-        leadLoanRepository.save(leadLoanEntity);
     }
 
 }

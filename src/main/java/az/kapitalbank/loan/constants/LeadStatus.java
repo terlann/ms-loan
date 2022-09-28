@@ -9,10 +9,7 @@ import lombok.experimental.FieldDefaults;
 public enum LeadStatus {
     WAITING,
     SENDING,
-    SUCCESS,
-    DELETED,
     OPTIMUS_REJECTED,
     OPTIMUS_ERROR,
-    OPTIMUS_ACCEPTED,
-    ERROR;
+    OPTIMUS_ACCEPTED;
 }

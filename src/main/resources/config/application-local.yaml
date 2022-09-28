@@ -1,7 +1,7 @@
 spring:
   cloud:
     function:
-      definition: produceLead;salesChannelResult
+      definition: produceLead;salesChannelResult;leadStatusResult
     stream:
       binders:
         kafka-optimus:
