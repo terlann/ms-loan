@@ -81,11 +81,10 @@ public class LeadLoanService {
     public void updateLeadStatus(LeadStatusDto leadStatusDto) {
         log.info("Lead status update process was started. leadStatusEvent: {}", leadStatusDto);
         var leadLoanEntity = leadLoanRepository.findById(leadStatusDto.getId());
-        if (leadLoanEntity.isPresent()) {
-            leadLoanEntity.get().setStatus(leadStatusDto.getStatus());
-        } else {
+        if (leadLoanEntity.isEmpty()) {
             log.info("Lead status update process was failed. leadStatusEvent: {}", leadStatusDto);
+            return;
         }
+        leadLoanEntity.get().setStatus(leadStatusDto.getStatus());
     }
-
 }
