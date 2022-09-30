@@ -1,8 +1,8 @@
 package az.kapitalbank.loan.service;
 
 import az.kapitalbank.loan.constants.Error;
-import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.constants.ProductType;
+import az.kapitalbank.loan.constants.Status;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.LeadStatusDto;
 import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
@@ -52,7 +52,7 @@ public class LeadLoanService {
         }
 
         LeadLoanEntity loanEntity = leadLoanMapper.toLoanEntity(leadLoanRequestDto, source);
-        loanEntity.setStatus(LeadStatus.WAITING);
+        loanEntity.setStatus(Status.WAITING);
         loanEntity.setInsertedDate(LocalDateTime.now());
 
         LeadLoanEntity leadLoanEntityResult = leadLoanRepository.save(loanEntity);
@@ -80,12 +80,12 @@ public class LeadLoanService {
     @Transactional
     public void updateLeadStatus(LeadStatusDto leadStatusDto) {
         log.info("Lead status update process was started. leadStatusEvent: {}", leadStatusDto);
-        var leadLoanEntity = leadLoanRepository.findById(leadStatusDto.getId())
-                .orElseThrow(() -> new CommonException(
-                        Error.LEAD_NOT_FOUND,
-                        "Lead Not Found : leadId - "
-                                + leadStatusDto.getId()));
-        leadLoanEntity.setStatus(leadStatusDto.getLeadStatus());
+        var leadLoanEntity = leadLoanRepository.findById(leadStatusDto.getId());
+        if (leadLoanEntity.isPresent()) {
+            leadLoanEntity.get().setStatus(leadStatusDto.getStatus());
+        } else {
+            log.info("Lead status update process was failed. leadStatusEvent: {}", leadStatusDto);
+        }
     }
 
 }

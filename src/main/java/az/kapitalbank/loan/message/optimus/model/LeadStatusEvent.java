@@ -1,6 +1,6 @@
 package az.kapitalbank.loan.message.optimus.model;
 
-import az.kapitalbank.loan.constants.LeadStatus;
+import az.kapitalbank.loan.constants.Status;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -11,5 +11,5 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LeadStatusEvent {
     String id;
-    LeadStatus leadStatus;
+    Status status;
 }

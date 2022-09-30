@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public enum LeadStatus {
+public enum Status {
     WAITING,
     SENDING,
     OPTIMUS_REJECTED,

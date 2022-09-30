@@ -5,7 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import az.kapitalbank.loan.constants.LeadStatus;
+import az.kapitalbank.loan.constants.Status;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
 import az.kapitalbank.loan.mapper.LeadLoanMapper;
@@ -56,7 +56,7 @@ class LoanSchedulerTest {
                 .build();
 
 
-        when(leadLoanRepository.findBySourceAndStatusIsNot(sources.get(0), LeadStatus.SENDING))
+        when(leadLoanRepository.findBySourceAndStatusIsNot(sources.get(0), Status.SENDING))
                 .thenReturn(List.of(leadLoanEntity));
 
         var loanEvent = LeadLoanEvent.builder().build();
@@ -72,7 +72,7 @@ class LoanSchedulerTest {
         verify(leadLoanRepository, times(1))
                 .save(leadLoanEntity);
 
-        assertEquals(LeadStatus.SENDING,
+        assertEquals(Status.SENDING,
                 leadLoanEntity.getStatus());
 
     }

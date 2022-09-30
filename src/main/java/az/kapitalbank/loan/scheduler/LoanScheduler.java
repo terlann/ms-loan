@@ -2,7 +2,7 @@ package az.kapitalbank.loan.scheduler;
 
 import static lombok.AccessLevel.PRIVATE;
 
-import az.kapitalbank.loan.constants.LeadStatus;
+import az.kapitalbank.loan.constants.Status;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
 import az.kapitalbank.loan.mapper.LeadLoanMapper;
@@ -62,7 +62,7 @@ public class LoanScheduler {
 
                     List<LeadLoanEntity> loans =
                             leadLoanRepository.findBySourceAndStatusIsNot(source,
-                                    LeadStatus.SENDING);
+                                    Status.SENDING);
 
                     if (Objects.nonNull(loans)) {
 
@@ -70,7 +70,7 @@ public class LoanScheduler {
                             log.info("STARTING SENDING DATA FROM DB LEAD : {}", leadLoanEntity);
                             sendLeadWithMessaging(
                                     leadLoanMapper.toLeadLoanModel(leadLoanEntity, leadSource));
-                            leadLoanEntity.setStatus(LeadStatus.SENDING);
+                            leadLoanEntity.setStatus(Status.SENDING);
                             leadLoanRepository.save(leadLoanEntity);
                             log.info("ENDING SENDING DATA FROM DB LEAD : {}", leadLoanEntity);
                         });

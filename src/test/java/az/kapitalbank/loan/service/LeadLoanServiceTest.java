@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import az.kapitalbank.loan.constants.LeadStatus;
+import az.kapitalbank.loan.constants.Status;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.LeadStatusDto;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
@@ -52,7 +52,7 @@ class LeadLoanServiceTest {
                 .name("terminal")
                 .build();
         var loanEntity = LeadLoanEntity.builder()
-                .status(LeadStatus.WAITING)
+                .status(Status.WAITING)
                 .build();
         var leadLoanEvent = LeadLoanEvent.builder()
                 .source(LeadSource.builder().code(leadSource).build())
@@ -106,11 +106,11 @@ class LeadLoanServiceTest {
     void updateLeadStatusSuccess() {
         var leadLoanEntity = LeadLoanEntity.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
-                .status(LeadStatus.WAITING)
+                .status(Status.WAITING)
                 .build();
         var leadStatusDto = LeadStatusDto.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
-                .leadStatus(LeadStatus.OPTIMUS_ACCEPTED)
+                .status(Status.OPTIMUS_ACCEPTED)
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.ofNullable(leadLoanEntity));
@@ -122,11 +122,11 @@ class LeadLoanServiceTest {
     void updateLeadStatusException() {
         var leadLoanEntity = LeadLoanEntity.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
-                .status(LeadStatus.WAITING)
+                .status(Status.WAITING)
                 .build();
         var leadStatusDto = LeadStatusDto.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
-                .leadStatus(LeadStatus.OPTIMUS_ACCEPTED)
+                .status(Status.OPTIMUS_ACCEPTED)
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.empty());
