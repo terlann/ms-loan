@@ -130,8 +130,7 @@ class LeadLoanServiceTest {
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.empty());
-        assertThrows(CommonException.class,
-                () -> leadLoanService.updateLeadStatus(leadStatusDto));
+        leadLoanService.updateLeadStatus(leadStatusDto);
         verify(leadLoanRepository).findById(leadLoanEntity.getId());
     }
 }
