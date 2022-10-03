@@ -110,7 +110,7 @@ class LeadLoanServiceTest {
                 .build();
         var leadStatusDto = LeadStatusDto.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
-                .status(Status.OPTIMUS_ACCEPTED)
+                .status(Status.ACCEPTED)
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.ofNullable(leadLoanEntity));
@@ -126,7 +126,7 @@ class LeadLoanServiceTest {
                 .build();
         var leadStatusDto = LeadStatusDto.builder()
                 .id("85c0407c-3d94-11ed-b878-0242ac120002")
-                .status(Status.OPTIMUS_ACCEPTED)
+                .status(Status.ACCEPTED)
                 .build();
         when(leadLoanRepository.findById("85c0407c-3d94-11ed-b878-0242ac120002")).thenReturn(
                 Optional.empty());

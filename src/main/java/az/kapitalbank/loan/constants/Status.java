@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 public enum Status {
     WAITING,
     SENDING,
-    OPTIMUS_REJECTED,
-    OPTIMUS_ERROR,
-    OPTIMUS_ACCEPTED;
+    REJECTED,
+    ERROR,
+    ACCEPTED;
 }
