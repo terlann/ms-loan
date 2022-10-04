@@ -1,8 +1,10 @@
 package az.kapitalbank.loan.mapper;
 
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
+import az.kapitalbank.loan.dto.LeadStatusDto;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
+import az.kapitalbank.loan.message.optimus.model.LeadStatusEvent;
 import az.kapitalbank.loan.message.telesales.model.LeadLoanEvent;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -35,5 +37,6 @@ public interface LeadLoanMapper {
     @Mapping(target = "phoneNumber", source = "leadLoanEvent.cnsAddress")
     LeadLoanRequestDto toLeadLoanRequestDto(LeadLoanEvent leadLoanEvent);
 
+    LeadStatusDto toLeadStatusDto(LeadStatusEvent event);
 
 }
