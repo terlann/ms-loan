@@ -1,8 +1,8 @@
 package az.kapitalbank.loan.entity;
 
 import az.kapitalbank.loan.constants.FormalizationMethod;
-import az.kapitalbank.loan.constants.LeadStatus;
 import az.kapitalbank.loan.constants.ProductType;
+import az.kapitalbank.loan.constants.Status;
 import az.kapitalbank.loan.constants.SubProductType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -55,7 +55,7 @@ public class LeadLoanEntity {
     String leadComment;
     LocalDateTime insertedDate;
     @Enumerated(EnumType.STRING)
-    LeadStatus status;
+    Status status;
     String source;
     Boolean isAgreement;
     FormalizationMethod formalizationMethod;
