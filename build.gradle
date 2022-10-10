@@ -100,7 +100,6 @@ sonarqube {
                         "**/az/kapitalbank/loan/repository/**," +
                         "**/az/kapitalbank/loan/scheduler/**," +
                         "**/az/kapitalbank/loan/Application.java"
-
     }
 }
 jacoco {
