@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerEvent {
     String cif;
-    Integer pan;
+    String pan;
     String pin;
     String address;
     String fullName;

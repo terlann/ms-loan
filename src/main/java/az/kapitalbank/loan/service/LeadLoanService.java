@@ -5,7 +5,7 @@ import az.kapitalbank.loan.constants.ProductType;
 import az.kapitalbank.loan.constants.Status;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.LeadStatusDto;
-import az.kapitalbank.loan.dto.response.SaveLeadResponseDto;
+import az.kapitalbank.loan.dto.response.LeadResponseDto;
 import az.kapitalbank.loan.dto.response.WrapperResponse;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
@@ -36,8 +36,8 @@ public class LeadLoanService {
     LeadSourceRepository leadSourceRepository;
 
     @Transactional
-    public WrapperResponse<SaveLeadResponseDto> saveLead(LeadLoanRequestDto leadLoanRequestDto,
-                                                         String leadSource) {
+    public WrapperResponse<LeadResponseDto> saveLead(LeadLoanRequestDto leadLoanRequestDto,
+                                                     String leadSource) {
         log.info("save lead start: Request - {}, source - [{}]", leadLoanRequestDto, leadSource);
 
         LeadSourceEntity source = leadSourceRepository.findById(leadSource).orElseThrow(
@@ -62,13 +62,13 @@ public class LeadLoanService {
             leadLoanEvent.setProductType(ProductType.NONE);
         }
         sendLeadWithMessaging(leadLoanEvent);
-        SaveLeadResponseDto saveLeadResponseDto = new SaveLeadResponseDto();
-        saveLeadResponseDto.setLeadId(leadLoanEntityResult.getId());
+        LeadResponseDto leadResponseDto =
+                LeadResponseDto.builder().leadId(leadLoanEntityResult.getId()).build();
         log.info("save lead finish: Request - {}, lead-id - [{}]", leadLoanRequestDto,
                 leadLoanEntityResult.getId());
 
-        return WrapperResponse.<SaveLeadResponseDto>builder()
-                .data(saveLeadResponseDto)
+        return WrapperResponse.<LeadResponseDto>builder()
+                .data(leadResponseDto)
                 .build();
     }
 
