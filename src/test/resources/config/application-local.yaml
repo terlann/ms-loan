@@ -1,0 +1,47 @@
+spring:
+  cloud:
+    function:
+      definition: produceLead;salesChannelResult;leadStatusResult
+    stream:
+      binders:
+        kafka-optimus:
+          type: kafka
+          environment.spring.cloud.stream.kafka.binder:
+            brokers: localhost:9092
+            auto-create-topics: true
+            auto-add-partitions: true
+            min-partition-count: 1
+        kafka-atlas:
+          type: kafka
+          environment.spring.cloud.stream.kafka.binder:
+            brokers: localhost:9092
+      bindings:
+        produceLead-out-0:
+          binder: kafka-optimus
+          contentType: application/json
+          group: loan-lead-group
+          destination: hot-lead-integration-loan
+        salesChannelResult-in-0:
+          binder: kafka-atlas
+          contentType: application/json
+          group: sale-channel-8196
+          destination: sale-channel-8196
+        leadStatusResult-in-0:
+          binder: kafka-optimus
+          contentType: application/json
+          group: loan-lead-status-group
+          destination: hot-lead-integration-loan-status
+  datasource:
+    url: jdbc:oracle:thin:@//172.21.14.34:1521/ldb
+    username: LEAD_HOT
+    password: 4H68enVKjpr##ApzemCG4Y
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+server:
+  port: 8083
+
+loan:
+  sql:
+    sources: "0008"
