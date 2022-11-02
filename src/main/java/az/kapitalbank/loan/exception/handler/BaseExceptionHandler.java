@@ -28,7 +28,7 @@ public class BaseExceptionHandler extends ResponseEntityExceptionHandler {
             HttpHeaders headers,
             HttpStatus status,
             WebRequest request) {
-        log.error("Request - {}, Exception: {} ", request.toString(), ex);
+        log.error("Request - {}, Exception: {}", request.toString(), ex);
         Map<String, String> warnings = new HashMap<>();
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             warnings.put(fieldError.getField(), fieldError.getDefaultMessage());

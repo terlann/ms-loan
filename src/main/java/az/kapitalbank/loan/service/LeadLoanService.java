@@ -62,8 +62,7 @@ public class LeadLoanService {
             leadLoanEvent.setProductType(ProductType.NONE);
         }
         sendLeadWithMessaging(leadLoanEvent);
-        LeadResponseDto leadResponseDto =
-                LeadResponseDto.builder().leadId(leadLoanEntityResult.getId()).build();
+        LeadResponseDto leadResponseDto = new LeadResponseDto(leadLoanEntityResult.getId());
         log.info("save lead finish: Request - {}, lead-id - [{}]", leadLoanRequestDto,
                 leadLoanEntityResult.getId());
 

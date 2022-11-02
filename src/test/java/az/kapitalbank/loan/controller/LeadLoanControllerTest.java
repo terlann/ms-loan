@@ -37,9 +37,7 @@ class LeadLoanControllerTest {
         var request = LeadLoanRequestDto.builder()
                 .phoneNumber(PHONE_NUMBER.getValue())
                 .build();
-        var response = LeadResponseDto.builder()
-                .leadId(LEAD_ID.getValue())
-                .build();
+        var response = new LeadResponseDto(LEAD_ID.getValue());
         when(leadLoanService.saveLead(request, LEAD_SOURCE.getValue())).thenReturn(
                 WrapperResponse.<LeadResponseDto>builder().data(response).build());
         mockMvc.perform(post("/v1/lead/loan")
