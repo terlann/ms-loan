@@ -25,10 +25,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @Entity
 @Builder
 @NoArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
 @Table(name = "KB_LEAD_LOAN")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -65,3 +65,4 @@ public class LeadLoanEntity {
     String umicoUserId;
     String fraudReason;
 }
+
