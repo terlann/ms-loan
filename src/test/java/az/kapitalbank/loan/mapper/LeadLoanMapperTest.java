@@ -57,16 +57,16 @@ class LeadLoanMapperTest {
                 .subProductType(SubProductType.UMICO)
                 .amount(BigDecimal.ONE)
                 .duration(6)
-                .campaignName("KapitalBank")
                 .source(LeadSource.builder()
                         .name(getLeadSource().getName())
                         .code(getLeadSource().getCode())
                         .build())
-                .comment("pin")
+                .comment("no comment")
                 .mkrAndGovAgreement(true)
                 .monthlyPayment(BigDecimal.ONE)
                 .formalizationMethod(FormalizationMethod.VIDEO_CALL)
                 .otherProcessId("5612")
+                .fraudReason("PIN")
                 .build();
         var actual = leadLoanMapper.toLeadLoanModel(leadLoanEntity, getLeadSource());
         assertEquals(leadLoanEvent, actual);

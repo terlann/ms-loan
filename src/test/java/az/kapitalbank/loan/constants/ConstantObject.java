@@ -33,6 +33,7 @@ public class ConstantObject {
                 .formalizationMethod(leadLoanRequestDto.getFormalizationMethod())
                 .monthlyPayment(leadLoanRequestDto.getMonthlyPayment())
                 .source(leadSource.getCode())
+                .fraudReason(leadLoanRequestDto.getFraudReason())
                 .build();
         return leadLoanEntity;
     }
@@ -59,6 +60,7 @@ public class ConstantObject {
                 .formalizationMethod(FormalizationMethod.VIDEO_CALL)
                 .monthlyPayment(BigDecimal.ONE)
                 .source(leadSource.getCode())
+                .fraudReason("PIN")
                 .build();
         return leadLoanEntity;
     }
@@ -90,6 +92,7 @@ public class ConstantObject {
                 .productType(ProductType.UMICO_MARKETPLACE)
                 .subProductType(SubProductType.UMICO)
                 .formalizationMethod(FormalizationMethod.VIDEO_CALL)
+                .fraudReason("PIN")
                 .build();
     }
 
@@ -118,6 +121,7 @@ public class ConstantObject {
                 .monthlyPayment(BigDecimal.ONE)
                 .formalizationMethod(FormalizationMethod.VIDEO_CALL)
                 .otherProcessId("5612")
+                .fraudReason("PIN")
                 .build();
     }
 

@@ -30,4 +30,5 @@ public class LeadLoanEvent {
     FormalizationMethod formalizationMethod;
     BigDecimal monthlyPayment;
     String umicoUserId;
+    String fraudReason;
 }
