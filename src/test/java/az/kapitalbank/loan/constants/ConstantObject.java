@@ -41,7 +41,7 @@ public class ConstantObject {
     public static LeadLoanEntity getLeadLoanEntityForOptimus(
             LeadSourceEntity leadSource) {
         var leadLoanEntity = LeadLoanEntity.builder()
-                .fullname("Terlan Qurbanmov")
+                .fullname("Terlan Qurbanov")
                 .pincode("5JR9R11")
                 .phoneNumber("+994773227040")
                 .productType(ProductType.UMICO_MARKETPLACE)
@@ -103,7 +103,7 @@ public class ConstantObject {
                         .pan("4169111122223333")
                         .pin("5JR9R11")
                         .address("Baki.s/Nizami.k")
-                        .fullName("Terlan Qurbanmov")
+                        .fullName("Terlan Qurbanov")
                         .workplace("KapitalBank")
                         .phoneNumber("+994773227040")
                         .build())

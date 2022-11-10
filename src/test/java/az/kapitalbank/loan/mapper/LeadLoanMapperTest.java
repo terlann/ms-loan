@@ -48,7 +48,7 @@ class LeadLoanMapperTest {
                         .cif("0130179")
                         .pan("4169111122223333").pin("5JR9R11")
                         .address("Baki.s/Nizami.k")
-                        .fullName("Terlan Qurbanmov")
+                        .fullName("Terlan Qurbanov")
                         .workplace("KapitalBank")
                         .phoneNumber("+994773227040")
                         .build())
