@@ -33,7 +33,7 @@ class LeadLoanControllerTest {
     LeadLoanService leadLoanService;
 
     @Test
-    void addLead_ShouldPass() throws Exception {
+    void addLead_xLeadSourcePresentsInHeader_ShouldResponseOkWithLeadId() throws Exception {
         var request = LeadLoanRequestDto.builder()
                 .phoneNumber(PHONE_NUMBER.getValue())
                 .build();
