@@ -1,5 +1,7 @@
 package az.kapitalbank.loan.service;
 
+import static az.kapitalbank.loan.constants.TestConstant.LEAD_ID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -7,6 +9,8 @@ import static org.mockito.Mockito.when;
 import az.kapitalbank.loan.constants.Status;
 import az.kapitalbank.loan.dto.LeadLoanRequestDto;
 import az.kapitalbank.loan.dto.LeadStatusDto;
+import az.kapitalbank.loan.dto.response.LeadResponseDto;
+import az.kapitalbank.loan.dto.response.WrapperResponse;
 import az.kapitalbank.loan.entity.LeadLoanEntity;
 import az.kapitalbank.loan.entity.LeadSourceEntity;
 import az.kapitalbank.loan.exception.CommonException;
@@ -52,14 +56,13 @@ class LeadLoanServiceTest {
                 .name("terminal")
                 .build();
         var loanEntity = LeadLoanEntity.builder()
+                .id(LEAD_ID.getValue())
                 .status(Status.WAITING)
                 .build();
         var leadLoanEvent = LeadLoanEvent.builder()
                 .source(LeadSource.builder().code(leadSource).build())
                 .amount(BigDecimal.ONE)
                 .build();
-
-
         when(leadSourceRepository.findById(leadSource)).thenReturn(
                 Optional.of(leadSourceEntity));
         when(leadLoanMapper.toLoanEntity(leadLoanRequestDto, leadSourceEntity)).thenReturn(
@@ -67,9 +70,10 @@ class LeadLoanServiceTest {
         when(leadLoanRepository.save(loanEntity)).thenReturn(loanEntity);
         when(leadLoanMapper.toLeadLoanModel(loanEntity, leadSourceEntity)).thenReturn(
                 leadLoanEvent);
-
-        leadLoanService.saveLead(leadLoanRequestDto, leadSource);
-        verify(leadSourceRepository).findById(leadSource);
+        var expected = WrapperResponse.builder()
+                .data(LeadResponseDto.builder().leadId(LEAD_ID.getValue()).build()).build();
+        var actual = leadLoanService.saveLead(leadLoanRequestDto, leadSource);
+        assertEquals(expected, actual);
     }
 
     @Test
