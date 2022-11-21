@@ -17,6 +17,14 @@ public interface LeadLoanMapper {
 
     @Mapping(target = "source", source = "leadSource.code")
     @Mapping(target = "status", ignore = true)
+    @Mapping(target = "fraudReason", source = "leadLoanRequestDto.fraudReason")
+    @Mapping(target = "leadComment", source = "leadLoanRequestDto.leadComment")
+    @Mapping(target = "customerCif", source = "leadLoanRequestDto.cif")
+    @Mapping(target = "customerCardPan", source = "leadLoanRequestDto.cardPan")
+    @Mapping(target = "couponCode", source = "leadLoanRequestDto.couponCode")
+    @Mapping(target = "umicoUserId", source = "leadLoanRequestDto.umicoUserId")
+    @Mapping(target = "customerWorkplace", source = "leadLoanRequestDto.workplace")
+    @Mapping(target = "customerAddress", source = "leadLoanRequestDto.address")
     LeadLoanEntity toLoanEntity(LeadLoanRequestDto leadLoanRequestDto, LeadSourceEntity leadSource);
 
     @Mapping(target = "customer.fullName", source = "leadLoanEntity.fullname")
@@ -31,6 +39,9 @@ public interface LeadLoanMapper {
     @Mapping(target = "source.code", source = "leadSourceEntity.code")
     @Mapping(target = "source.name", source = "leadSourceEntity.name")
     @Mapping(target = "comment", source = "leadLoanEntity.leadComment")
+    @Mapping(target = "fraudReason", source = "leadLoanEntity.fraudReason")
+    @Mapping(target = "customer.cif", source = "leadLoanEntity.customerCif")
+    @Mapping(target = "otherProcessId", source = "leadLoanEntity.otherProcessId")
     az.kapitalbank.loan.message.optimus.model.LeadLoanEvent toLeadLoanModel(
             LeadLoanEntity leadLoanEntity, LeadSourceEntity leadSourceEntity);
 

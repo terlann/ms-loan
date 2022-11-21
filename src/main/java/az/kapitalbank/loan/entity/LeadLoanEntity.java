@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Builder
 @NoArgsConstructor
+@EqualsAndHashCode
 @AllArgsConstructor
 @Table(name = "KB_LEAD_LOAN")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -61,4 +63,6 @@ public class LeadLoanEntity {
     FormalizationMethod formalizationMethod;
     BigDecimal monthlyPayment;
     String umicoUserId;
+    String fraudReason;
 }
+

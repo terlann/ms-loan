@@ -42,4 +42,5 @@ public class LeadLoanRequestDto {
     FormalizationMethod formalizationMethod;
     BigDecimal monthlyPayment;
     String umicoUserId;
+    String fraudReason;
 }

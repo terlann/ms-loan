@@ -5,5 +5,6 @@ public enum ProductType {
     BIRKART,
     EDU_CREDIT,
     UMICO_MARKETPLACE,
-    NONE
+    NONE,
+    BIRKART_LIMIT
 }
