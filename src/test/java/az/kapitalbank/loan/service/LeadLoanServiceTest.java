@@ -71,7 +71,7 @@ class LeadLoanServiceTest {
         when(leadLoanMapper.toLeadLoanModel(loanEntity, leadSourceEntity)).thenReturn(
                 leadLoanEvent);
         var expected = WrapperResponse.builder()
-                .data(LeadResponseDto.builder().leadId(LEAD_ID.getValue()).build()).build();
+                .data(new LeadResponseDto(LEAD_ID.getValue())).build();
         var actual = leadLoanService.saveLead(leadLoanRequestDto, leadSource);
         assertEquals(expected, actual);
     }
