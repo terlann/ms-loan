@@ -111,6 +111,7 @@ class LeadLoanServiceTest {
         assertThrows(CommonException.class,
                 () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
     }
+
     @Test
     void saveLeadSourceNotActiveException() {
         String leadSource = "0014";
