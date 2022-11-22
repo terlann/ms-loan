@@ -55,7 +55,7 @@ public class LeadLoanService {
         loanEntity.setStatus(Status.WAITING);
         loanEntity.setInsertedDate(LocalDateTime.now());
 
-        LeadLoanEntity leadLoanEntityResult = leadLoanRepository.save(loanEntity);
+        LeadLoanEntity leadLoanEntityResult = leadLoanRepository.saveAndFlush(loanEntity);
         LeadLoanEvent leadLoanEvent =
                 leadLoanMapper.toLeadLoanModel(leadLoanEntityResult, source);
         if (Objects.isNull(leadLoanEvent.getProductType())) {

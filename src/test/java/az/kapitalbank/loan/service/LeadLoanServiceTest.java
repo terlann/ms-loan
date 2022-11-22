@@ -67,7 +67,7 @@ class LeadLoanServiceTest {
                 Optional.of(leadSourceEntity));
         when(leadLoanMapper.toLoanEntity(leadLoanRequestDto, leadSourceEntity)).thenReturn(
                 loanEntity);
-        when(leadLoanRepository.save(loanEntity)).thenReturn(loanEntity);
+        when(leadLoanRepository.saveAndFlush(loanEntity)).thenReturn(loanEntity);
         when(leadLoanMapper.toLeadLoanModel(loanEntity, leadSourceEntity)).thenReturn(
                 leadLoanEvent);
         var expected = WrapperResponse.builder()
@@ -76,6 +76,41 @@ class LeadLoanServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void saveLead_SourceStatusFalse_ShouldCommentException() {
+        String leadSource = "0014";
+        var leadLoanRequestDto = LeadLoanRequestDto.builder()
+                .address("")
+                .build();
+        var leadSourceEntity = LeadSourceEntity.builder()
+                .code(leadSource)
+                .status(false)
+                .name("terminal")
+                .build();
+        when(leadSourceRepository.findById(leadSource)).thenReturn(
+                Optional.ofNullable(leadSourceEntity));
+
+        assertThrows(CommonException.class,
+                () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
+    }
+
+    @Test
+    void saveLead_SourceNotFound_ShouldCommentException() {
+        String leadSource = "0014";
+        var leadLoanRequestDto = LeadLoanRequestDto.builder()
+                .address("")
+                .build();
+        var leadSourceEntity = LeadSourceEntity.builder()
+                .code(leadSource)
+                .status(true)
+                .name("terminal")
+                .build();
+        when(leadSourceRepository.findById(leadSource)).thenReturn(
+                Optional.empty());
+
+        assertThrows(CommonException.class,
+                () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
+    }
     @Test
     void saveLeadSourceNotActiveException() {
         String leadSource = "0014";
