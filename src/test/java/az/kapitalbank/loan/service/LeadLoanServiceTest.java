@@ -1,6 +1,7 @@
 package az.kapitalbank.loan.service;
 
 import static az.kapitalbank.loan.constants.TestConstant.LEAD_ID;
+import static az.kapitalbank.loan.constants.TestConstant.PHONE_NUMBER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
@@ -95,15 +96,11 @@ class LeadLoanServiceTest {
     }
 
     @Test
-    void saveLead_SourceNotFound_ShouldCommentException() {
+    void saveLead_SourceNotFound_ShouldCommonException() {
         String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
-                .address("")
-                .build();
-        var leadSourceEntity = LeadSourceEntity.builder()
-                .code(leadSource)
-                .status(true)
-                .name("terminal")
+                .address("Baki.S")
+                .phoneNumber(PHONE_NUMBER.getValue())
                 .build();
         when(leadSourceRepository.findById(leadSource)).thenReturn(
                 Optional.empty());
@@ -130,9 +127,6 @@ class LeadLoanServiceTest {
     @Test
     void saveLeadSourceNotFoundException() {
         String leadSource = "0014";
-        var leadSourceEntity = LeadSourceEntity.builder()
-                .code(leadSource)
-                .build();
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
                 .build();
         when(leadSourceRepository.findById(leadSource)).thenReturn(
