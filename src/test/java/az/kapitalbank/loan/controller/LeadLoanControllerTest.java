@@ -49,4 +49,16 @@ class LeadLoanControllerTest {
 
         verify(leadLoanService).saveLead(request, LEAD_SOURCE.getValue());
     }
+
+    @Test
+    void addLead_xLeadSourcePresentsInHeader_ShouldResponseBadRequest() throws Exception {
+        var request = LeadLoanRequestDto.builder()
+                .build();
+        mockMvc.perform(post("/v1/lead/loan")
+                        .header("X-lEAD-SOURCE", LEAD_SOURCE.getValue())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest());
+    }
 }
+
