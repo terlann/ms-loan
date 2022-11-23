@@ -1,6 +1,8 @@
 package az.kapitalbank.loan.service;
 
+import static az.kapitalbank.loan.constants.TestConstant.ADDRESS;
 import static az.kapitalbank.loan.constants.TestConstant.LEAD_ID;
+import static az.kapitalbank.loan.constants.TestConstant.LEAD_SOURCE;
 import static az.kapitalbank.loan.constants.TestConstant.PHONE_NUMBER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -47,12 +49,11 @@ class LeadLoanServiceTest {
 
     @Test
     void saveLead() {
-        String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
-                .address("Baki.s")
+                .address(ADDRESS.getValue())
                 .build();
         var leadSourceEntity = LeadSourceEntity.builder()
-                .code(leadSource)
+                .code(LEAD_SOURCE.getValue())
                 .status(true)
                 .name("terminal")
                 .build();
@@ -61,10 +62,10 @@ class LeadLoanServiceTest {
                 .status(Status.WAITING)
                 .build();
         var leadLoanEvent = LeadLoanEvent.builder()
-                .source(LeadSource.builder().code(leadSource).build())
+                .source(LeadSource.builder().code(LEAD_SOURCE.getValue()).build())
                 .amount(BigDecimal.ONE)
                 .build();
-        when(leadSourceRepository.findById(leadSource)).thenReturn(
+        when(leadSourceRepository.findById(LEAD_SOURCE.getValue())).thenReturn(
                 Optional.of(leadSourceEntity));
         when(leadLoanMapper.toLoanEntity(leadLoanRequestDto, leadSourceEntity)).thenReturn(
                 loanEntity);
@@ -73,68 +74,64 @@ class LeadLoanServiceTest {
                 leadLoanEvent);
         var expected = WrapperResponse.builder()
                 .data(new LeadResponseDto(LEAD_ID.getValue())).build();
-        var actual = leadLoanService.saveLead(leadLoanRequestDto, leadSource);
+        var actual = leadLoanService.saveLead(leadLoanRequestDto, LEAD_SOURCE.getValue());
         assertEquals(expected, actual);
     }
 
     @Test
     void saveLead_SourceStatusFalse_ShouldCommonException() {
-        String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
-                .address("Baki.s")
+                .address(ADDRESS.getValue())
                 .phoneNumber(PHONE_NUMBER.getValue())
                 .build();
         var leadSourceEntity = LeadSourceEntity.builder()
-                .code(leadSource)
+                .code(LEAD_ID.getValue())
                 .status(false)
                 .name("terminal")
                 .build();
-        when(leadSourceRepository.findById(leadSource)).thenReturn(
+        when(leadSourceRepository.findById(LEAD_SOURCE.getValue())).thenReturn(
                 Optional.ofNullable(leadSourceEntity));
 
         assertThrows(CommonException.class,
-                () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
+                () -> leadLoanService.saveLead(leadLoanRequestDto, LEAD_SOURCE.getValue()));
     }
 
     @Test
     void saveLead_SourceNotFound_ShouldCommonException() {
-        String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
-                .address("Baki.S")
+                .address(ADDRESS.getValue())
                 .phoneNumber(PHONE_NUMBER.getValue())
                 .build();
-        when(leadSourceRepository.findById(leadSource)).thenReturn(
+        when(leadSourceRepository.findById(LEAD_SOURCE.getValue())).thenReturn(
                 Optional.empty());
 
         assertThrows(CommonException.class,
-                () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
+                () -> leadLoanService.saveLead(leadLoanRequestDto, LEAD_SOURCE.getValue()));
     }
 
     @Test
     void saveLeadSourceNotActiveException() {
-        String leadSource = "0014";
         var leadSourceEntity = LeadSourceEntity.builder()
-                .code(leadSource)
+                .code(LEAD_SOURCE.getValue())
                 .build();
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
                 .build();
-        when(leadSourceRepository.findById(leadSource)).thenReturn(
+        when(leadSourceRepository.findById(LEAD_SOURCE.getValue())).thenReturn(
                 Optional.of(leadSourceEntity));
         assertThrows(CommonException.class,
-                () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
-        verify(leadSourceRepository).findById(leadSource);
+                () -> leadLoanService.saveLead(leadLoanRequestDto, LEAD_SOURCE.getValue()));
+        verify(leadSourceRepository).findById(LEAD_SOURCE.getValue());
     }
 
     @Test
     void saveLeadSourceNotFoundException() {
-        String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
                 .build();
-        when(leadSourceRepository.findById(leadSource)).thenReturn(
+        when(leadSourceRepository.findById(LEAD_SOURCE.getValue())).thenReturn(
                 Optional.empty());
         assertThrows(CommonException.class,
-                () -> leadLoanService.saveLead(leadLoanRequestDto, leadSource));
-        verify(leadSourceRepository).findById(leadSource);
+                () -> leadLoanService.saveLead(leadLoanRequestDto, LEAD_SOURCE.getValue()));
+        verify(leadSourceRepository).findById(LEAD_SOURCE.getValue());
     }
 
     @Test
