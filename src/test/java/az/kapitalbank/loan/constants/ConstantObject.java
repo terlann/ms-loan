@@ -82,7 +82,7 @@ public class ConstantObject {
                 .fullname("Terlan Qurbanov")
                 .isAgreement(true)
                 .monthlyPayment(BigDecimal.ONE)
-                .phoneNumber(PHONE_NUMBER.getValue())
+                .phoneNumber(PHONE_NUMBER)
                 .address("Baki.s")
                 .cardPan("123")
                 .pincode("5JR9RR")
@@ -141,7 +141,7 @@ public class ConstantObject {
 
     public static LeadLoanRequestDto getLeadLoanRequestDtoForTelesales() {
         return LeadLoanRequestDto.builder()
-                .phoneNumber(PHONE_NUMBER.getValue())
+                .phoneNumber(PHONE_NUMBER)
                 .build();
     }
 }

@@ -35,19 +35,19 @@ class LeadLoanControllerTest {
     @Test
     void addLead_xLeadSourcePresentsInHeader_ShouldResponseOkWithLeadId() throws Exception {
         var request = LeadLoanRequestDto.builder()
-                .phoneNumber(PHONE_NUMBER.getValue())
+                .phoneNumber(PHONE_NUMBER)
                 .build();
-        var response = new LeadResponseDto(LEAD_ID.getValue());
-        when(leadLoanService.saveLead(request, LEAD_SOURCE.getValue())).thenReturn(
+        var response = new LeadResponseDto(LEAD_ID);
+        when(leadLoanService.saveLead(request, LEAD_SOURCE)).thenReturn(
                 WrapperResponse.<LeadResponseDto>builder().data(response).build());
         mockMvc.perform(post("/v1/lead/loan")
-                        .header("X-lEAD-SOURCE", LEAD_SOURCE.getValue())
+                        .header("X-lEAD-SOURCE", LEAD_SOURCE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(jsonPath("$.data.lead_id").value(response.getLeadId()))
                 .andExpect(status().isOk());
 
-        verify(leadLoanService).saveLead(request, LEAD_SOURCE.getValue());
+        verify(leadLoanService).saveLead(request, LEAD_SOURCE);
     }
 
     @Test
@@ -55,7 +55,7 @@ class LeadLoanControllerTest {
         var request = LeadLoanRequestDto.builder()
                 .build();
         mockMvc.perform(post("/v1/lead/loan")
-                        .header("X-lEAD-SOURCE", LEAD_SOURCE.getValue())
+                        .header("X-lEAD-SOURCE", LEAD_SOURCE)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest());
