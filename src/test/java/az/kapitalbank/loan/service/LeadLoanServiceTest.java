@@ -49,7 +49,7 @@ class LeadLoanServiceTest {
     void saveLead() {
         String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
-                .address("")
+                .address("Baki.s")
                 .build();
         var leadSourceEntity = LeadSourceEntity.builder()
                 .code(leadSource)
@@ -81,7 +81,8 @@ class LeadLoanServiceTest {
     void saveLead_SourceStatusFalse_ShouldCommonException() {
         String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
-                .address("")
+                .address("Baki.s")
+                .phoneNumber(PHONE_NUMBER.getValue())
                 .build();
         var leadSourceEntity = LeadSourceEntity.builder()
                 .code(leadSource)
