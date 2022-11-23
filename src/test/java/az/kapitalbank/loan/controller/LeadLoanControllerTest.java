@@ -51,7 +51,7 @@ class LeadLoanControllerTest {
     }
 
     @Test
-    void addLead_xLeadSourcePresentsInHeader_ShouldResponseBadRequest() throws Exception {
+    void addLead_PhoneNumberIsNull_ShouldResponseBadRequest() throws Exception {
         var request = LeadLoanRequestDto.builder()
                 .build();
         mockMvc.perform(post("/v1/lead/loan")

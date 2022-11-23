@@ -77,7 +77,7 @@ class LeadLoanServiceTest {
     }
 
     @Test
-    void saveLead_SourceStatusFalse_ShouldCommentException() {
+    void saveLead_SourceStatusFalse_ShouldCommonException() {
         String leadSource = "0014";
         var leadLoanRequestDto = LeadLoanRequestDto.builder()
                 .address("")
