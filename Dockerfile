@@ -1,4 +1,4 @@
-FROM openjdk:11.0.3-jdk-slim-stretch 
+FROM nexus.kblab.local:8083/v1/repositories/kblab/openjdk:11.0.3-jdk-slim-stretch
 ARG DEPLOY_ENV
 WORKDIR /app
 ENV TZ Asia/Baku
